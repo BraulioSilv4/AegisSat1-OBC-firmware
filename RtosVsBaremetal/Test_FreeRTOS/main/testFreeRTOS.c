@@ -45,7 +45,7 @@ void app_main(void) {
     for (int i = 1; i <= N_TESTS; i++) {
         char task_name[100];
         sprintf(task_name, "work_task_%d", i);
-        xTaskCreate(work_task, task_name, STACK_SIZE, NULL, PRIORITY, NULL);
+        xTaskCreate(work_task, task_name, STACK_SIZE, NULL, task_priorities[i-1], NULL);
     }
 
     for (int i = 0; i < N_TESTS; i++)

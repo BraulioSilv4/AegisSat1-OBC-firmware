@@ -3,6 +3,8 @@
 #define STACK_SIZE 2048
 #define PRIORITY 1
 
+int task_priorities[] = {1, 1, 1, 1, 2};
+
 int fib(int n) {
     if (n <= 1) {
         return n;
