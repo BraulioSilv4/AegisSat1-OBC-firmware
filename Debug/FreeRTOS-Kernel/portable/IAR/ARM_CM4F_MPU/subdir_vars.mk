@@ -1,0 +1,54 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Add inputs and outputs from these tool invocations to the build variables 
+S_UPPER_SRCS += \
+../FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/mpu_wrappers_v2_asm.S 
+
+S_SRCS += \
+../FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/portasm.s 
+
+C_SRCS += \
+../FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/port.c 
+
+S_DEPS += \
+./FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/portasm.d 
+
+C_DEPS += \
+./FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/port.d 
+
+OBJS += \
+./FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/mpu_wrappers_v2_asm.obj \
+./FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/port.obj \
+./FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/portasm.obj 
+
+S_UPPER_DEPS += \
+./FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/mpu_wrappers_v2_asm.d 
+
+S_UPPER_DEPS__QUOTED += \
+"FreeRTOS-Kernel\portable\IAR\ARM_CM4F_MPU\mpu_wrappers_v2_asm.d" 
+
+OBJS__QUOTED += \
+"FreeRTOS-Kernel\portable\IAR\ARM_CM4F_MPU\mpu_wrappers_v2_asm.obj" \
+"FreeRTOS-Kernel\portable\IAR\ARM_CM4F_MPU\port.obj" \
+"FreeRTOS-Kernel\portable\IAR\ARM_CM4F_MPU\portasm.obj" 
+
+C_DEPS__QUOTED += \
+"FreeRTOS-Kernel\portable\IAR\ARM_CM4F_MPU\port.d" 
+
+S_DEPS__QUOTED += \
+"FreeRTOS-Kernel\portable\IAR\ARM_CM4F_MPU\portasm.d" 
+
+S_UPPER_SRCS__QUOTED += \
+"../FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/mpu_wrappers_v2_asm.S" 
+
+C_SRCS__QUOTED += \
+"../FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/port.c" 
+
+S_SRCS__QUOTED += \
+"../FreeRTOS-Kernel/portable/IAR/ARM_CM4F_MPU/portasm.s" 
+
+
