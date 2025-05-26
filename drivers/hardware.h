@@ -6,7 +6,10 @@
 #include "gpio.h"
 #include "msp430fr2433.h"
 
-void initialize_clocks();
-void initialize_UART();
+#define MCLK_FREQ_MHZ 16                     // MCLK = 8MHz
+
+void init_clocks();
+
+void init_UART();
 
 #endif  // HARDWARE_H

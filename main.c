@@ -9,6 +9,8 @@ int main(void) {
     xLedSemaphore = xSemaphoreCreateBinary();
     xSemaphoreGive(xLedSemaphore);
 
+    init_clocks();
+
     init_tasks();
 
     vTaskStartScheduler();
