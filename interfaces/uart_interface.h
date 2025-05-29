@@ -3,7 +3,7 @@
 
 #include "hardware.h"
 
-#include "string.h"
+#include "string_utils.h"
 
 bool uart_read_byte(uint8_t *byte);
 bool uart_read_line(char *buffer, size_t max_len);

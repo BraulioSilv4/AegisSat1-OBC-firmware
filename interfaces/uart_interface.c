@@ -34,7 +34,7 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
     size_t index = 0;
     uint8_t byte;
     bool in_sentence = false;
-    size_t pattern_len = strlen(pattern);
+    size_t pattern_len = string_length(pattern);
     size_t match_index = 0;
 
     while (1) {
@@ -68,6 +68,7 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
                     }
                 }
             }
+            xSemaphoreGive(xUartSemaphore);
         }
     }
 }

@@ -14,6 +14,9 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 
+// Global defines 
+#include "projdefines.h"
+
 #define MCLK_FREQ_MHZ 16                     // MCLK = 16MHz
 
 extern RingBuffer uartRx;

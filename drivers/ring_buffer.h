@@ -1,9 +1,8 @@
 #ifndef RING_BUFFER_H
 #define RING_BUFFER_H
 
+#include "projdefines.h"
 #include "stdint.h"
-
-#define RING_BUF_MAX_SIZE    100              // Size of GPS (GPGGA) sentence plus few extra bytes
 
 typedef struct {
     char buffer[RING_BUF_MAX_SIZE];
