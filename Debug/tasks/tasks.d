@@ -44,6 +44,7 @@ tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/driverlib/M
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/driverlib/MSP430FR2xx_4xx/timer_b.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/driverlib/MSP430FR2xx_4xx/tlv.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/driverlib/MSP430FR2xx_4xx/wdt_a.h
+tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/drivers/ring_buffer.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/FreeRTOS.h
 tasks/tasks.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stddef.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/include/FreeRTOSConfig.h
@@ -52,10 +53,13 @@ tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Ke
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/deprecated_definitions.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/src/portable/CCS/MSP430X/portmacro.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/mpu_wrappers.h
-tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/task.h
-tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/list.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/semphr.h
 tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/queue.h
+tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/task.h
+tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/list.h
+tasks/tasks.obj: C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/interfaces/uart_interface.h
+tasks/tasks.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h
+tasks/tasks.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h
 
 ../tasks/tasks.c:
 
@@ -145,6 +149,8 @@ C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/driverlib/MSP430FR2xx_4xx/tl
 
 C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/driverlib/MSP430FR2xx_4xx/wdt_a.h:
 
+C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/drivers/ring_buffer.h:
+
 C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/FreeRTOS.h:
 
 C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stddef.h:
@@ -161,11 +167,17 @@ C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/src/portable
 
 C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/mpu_wrappers.h:
 
+C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/semphr.h:
+
+C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/queue.h:
+
 C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/task.h:
 
 C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/list.h:
 
-C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/semphr.h:
+C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/interfaces/uart_interface.h:
 
-C:/Users/mineb/workspace_ccstheia/RTOS_MSP430FR2433/FreeRTOS-Kernel/include/queue.h:
+C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h:
+
+C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h:
 

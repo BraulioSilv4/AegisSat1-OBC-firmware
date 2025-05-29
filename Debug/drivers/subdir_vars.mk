@@ -6,21 +6,27 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../drivers/hardware.c 
+../drivers/clocks.c \
+../drivers/uart.c 
 
 C_DEPS += \
-./drivers/hardware.d 
+./drivers/clocks.d \
+./drivers/uart.d 
 
 OBJS += \
-./drivers/hardware.obj 
+./drivers/clocks.obj \
+./drivers/uart.obj 
 
 OBJS__QUOTED += \
-"drivers\hardware.obj" 
+"drivers\clocks.obj" \
+"drivers\uart.obj" 
 
 C_DEPS__QUOTED += \
-"drivers\hardware.d" 
+"drivers\clocks.d" \
+"drivers\uart.d" 
 
 C_SRCS__QUOTED += \
-"../drivers/hardware.c" 
+"../drivers/clocks.c" \
+"../drivers/uart.c" 
 
 

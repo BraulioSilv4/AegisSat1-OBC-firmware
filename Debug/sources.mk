@@ -118,5 +118,6 @@ FreeRTOS-Kernel/src/portable/MemMang \
 driverlib/MSP430FR2xx_4xx \
 drivers \
 include \
+interfaces \
 tasks \
 

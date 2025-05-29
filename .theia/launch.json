@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "RTOS_MSP430FR2433",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "RTOS_MSP430FR2433",
+                "resourceId": "/RTOS_MSP430FR2433"
+            }
+        }
+    ]
+}

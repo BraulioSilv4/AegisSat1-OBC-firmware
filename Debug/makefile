@@ -43,8 +43,11 @@ ORDERED_OBJS += \
 "./driverlib/MSP430FR2xx_4xx/timer_b.obj" \
 "./driverlib/MSP430FR2xx_4xx/tlv.obj" \
 "./driverlib/MSP430FR2xx_4xx/wdt_a.obj" \
-"./drivers/hardware.obj" \
+"./drivers/clocks.obj" \
+"./drivers/uart.obj" \
 "./include/freeRTOS_support.obj" \
+"./interfaces/uart_interface.obj" \
+"./tasks/gps_task.obj" \
 "./tasks/led_task.obj" \
 "./tasks/tasks.obj" \
 "../lnk_msp430fr2433.cmd" \
@@ -66,6 +69,7 @@ RMDIR := RMDIR /S/Q
 -include driverlib/MSP430FR2xx_4xx/subdir_vars.mk
 -include drivers/subdir_vars.mk
 -include include/subdir_vars.mk
+-include interfaces/subdir_vars.mk
 -include tasks/subdir_vars.mk
 -include subdir_rules.mk
 -include FreeRTOS-Kernel/src/subdir_rules.mk
@@ -74,6 +78,7 @@ RMDIR := RMDIR /S/Q
 -include driverlib/MSP430FR2xx_4xx/subdir_rules.mk
 -include drivers/subdir_rules.mk
 -include include/subdir_rules.mk
+-include interfaces/subdir_rules.mk
 -include tasks/subdir_rules.mk
 -include objects.mk
 
@@ -206,9 +211,9 @@ RTOS_MSP430FR2433.txt: $(EXE_OUTPUTS)
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
 	-$(RM) "main.obj" "FreeRTOS-Kernel\src\croutine.obj" "FreeRTOS-Kernel\src\event_groups.obj" "FreeRTOS-Kernel\src\list.obj" "FreeRTOS-Kernel\src\queue.obj" "FreeRTOS-Kernel\src\stream_buffer.obj" "FreeRTOS-Kernel\src\tasks.obj" "FreeRTOS-Kernel\src\timers.obj" "FreeRTOS-Kernel\src\portable\CCS\MSP430X\port.obj" "FreeRTOS-Kernel\src\portable\CCS\MSP430X\portext.obj" "FreeRTOS-Kernel\src\portable\MemMang\heap_4.obj" "driverlib\MSP430FR2xx_4xx\adc.obj" "driverlib\MSP430FR2xx_4xx\crc.obj" "driverlib\MSP430FR2xx_4xx\cs.obj" "driverlib\MSP430FR2xx_4xx\ecomp.obj" "driverlib\MSP430FR2xx_4xx\eusci_a_spi.obj" "driverlib\MSP430FR2xx_4xx\eusci_a_uart.obj" "driverlib\MSP430FR2xx_4xx\eusci_b_i2c.obj" "driverlib\MSP430FR2xx_4xx\eusci_b_spi.obj" "driverlib\MSP430FR2xx_4xx\framctl.obj" "driverlib\MSP430FR2xx_4xx\gpio.obj" "driverlib\MSP430FR2xx_4xx\lcd_e.obj" "driverlib\MSP430FR2xx_4xx\mpy32.obj" "driverlib\MSP430FR2xx_4xx\pmm.obj" "driverlib\MSP430FR2xx_4xx\rtc.obj" "driverlib\MSP430FR2xx_4xx\sac.obj" "driverlib\MSP430FR2xx_4xx\sfr.obj" 
-	-$(RM) "driverlib\MSP430FR2xx_4xx\sysctl.obj" "driverlib\MSP430FR2xx_4xx\tia.obj" "driverlib\MSP430FR2xx_4xx\timer_a.obj" "driverlib\MSP430FR2xx_4xx\timer_b.obj" "driverlib\MSP430FR2xx_4xx\tlv.obj" "driverlib\MSP430FR2xx_4xx\wdt_a.obj" "drivers\hardware.obj" "include\freeRTOS_support.obj" "tasks\led_task.obj" "tasks\tasks.obj" 
+	-$(RM) "driverlib\MSP430FR2xx_4xx\sysctl.obj" "driverlib\MSP430FR2xx_4xx\tia.obj" "driverlib\MSP430FR2xx_4xx\timer_a.obj" "driverlib\MSP430FR2xx_4xx\timer_b.obj" "driverlib\MSP430FR2xx_4xx\tlv.obj" "driverlib\MSP430FR2xx_4xx\wdt_a.obj" "drivers\clocks.obj" "drivers\uart.obj" "include\freeRTOS_support.obj" "interfaces\uart_interface.obj" "tasks\gps_task.obj" "tasks\led_task.obj" "tasks\tasks.obj" 
 	-$(RM) "main.d" "FreeRTOS-Kernel\src\croutine.d" "FreeRTOS-Kernel\src\event_groups.d" "FreeRTOS-Kernel\src\list.d" "FreeRTOS-Kernel\src\queue.d" "FreeRTOS-Kernel\src\stream_buffer.d" "FreeRTOS-Kernel\src\tasks.d" "FreeRTOS-Kernel\src\timers.d" "FreeRTOS-Kernel\src\portable\CCS\MSP430X\port.d" "FreeRTOS-Kernel\src\portable\MemMang\heap_4.d" "driverlib\MSP430FR2xx_4xx\adc.d" "driverlib\MSP430FR2xx_4xx\crc.d" "driverlib\MSP430FR2xx_4xx\cs.d" "driverlib\MSP430FR2xx_4xx\ecomp.d" "driverlib\MSP430FR2xx_4xx\eusci_a_spi.d" "driverlib\MSP430FR2xx_4xx\eusci_a_uart.d" "driverlib\MSP430FR2xx_4xx\eusci_b_i2c.d" "driverlib\MSP430FR2xx_4xx\eusci_b_spi.d" "driverlib\MSP430FR2xx_4xx\framctl.d" "driverlib\MSP430FR2xx_4xx\gpio.d" "driverlib\MSP430FR2xx_4xx\lcd_e.d" "driverlib\MSP430FR2xx_4xx\mpy32.d" "driverlib\MSP430FR2xx_4xx\pmm.d" "driverlib\MSP430FR2xx_4xx\rtc.d" "driverlib\MSP430FR2xx_4xx\sac.d" "driverlib\MSP430FR2xx_4xx\sfr.d" "driverlib\MSP430FR2xx_4xx\sysctl.d" "driverlib\MSP430FR2xx_4xx\tia.d" "driverlib\MSP430FR2xx_4xx\timer_a.d" 
-	-$(RM) "driverlib\MSP430FR2xx_4xx\timer_b.d" "driverlib\MSP430FR2xx_4xx\tlv.d" "driverlib\MSP430FR2xx_4xx\wdt_a.d" "drivers\hardware.d" "include\freeRTOS_support.d" "tasks\led_task.d" "tasks\tasks.d" 
+	-$(RM) "driverlib\MSP430FR2xx_4xx\timer_b.d" "driverlib\MSP430FR2xx_4xx\tlv.d" "driverlib\MSP430FR2xx_4xx\wdt_a.d" "drivers\clocks.d" "drivers\uart.d" "include\freeRTOS_support.d" "interfaces\uart_interface.d" "tasks\gps_task.d" "tasks\led_task.d" "tasks\tasks.d" 
 	-$(RM) "FreeRTOS-Kernel\src\portable\CCS\MSP430X\portext.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

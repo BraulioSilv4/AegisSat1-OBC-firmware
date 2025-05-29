@@ -3,4 +3,5 @@
 void init_tasks() {
     xTaskCreate(vLedTurnOnTask, "Turn on LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
     xTaskCreate(vLedTurnOffTask, "Turn off LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+    xTaskCreate(vGet_GPS, "GG", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 }
