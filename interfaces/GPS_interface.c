@@ -35,11 +35,7 @@ bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
 
     if(checksum != received_checksum) return false;
 
-    char buffer[RING_BUF_MAX_SIZE];
-    copy_string(buffer, nmea, sizeof(buffer));
-    buffer[sizeof(buffer) - 1] = '\0';
-
-    char *token = strtok_single_char(buffer, ',');
+    char *token = strtok_single_char((char *)nmea, ',');
     uint8_t field = GPGGA;
 
     while(token) {
@@ -54,6 +50,6 @@ bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
         token = strtok_single_char(NULL, ',');
         field++;
     }
-
+    
     return true;
 }   

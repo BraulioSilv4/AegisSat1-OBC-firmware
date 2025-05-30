@@ -19,11 +19,6 @@ void __attribute__ ((interrupt(USCI_A0_VECTOR))) USCI_A0_ISR (void)
     case USCI_UART_UCRXIFG: {
         enqueue(&uartRx, UCA0RXBUF);
         xSemaphoreGiveFromISR(xUartSemaphore, &xHigherPriorityTaskWoken);
-
-        // SEND BACK REMOVE
-        while(!(UCA0IFG & UCTXIFG));
-        UCA0TXBUF = UCA0RXBUF;
-        break;
     }
     case USCI_UART_UCTXIFG: break;
     case USCI_UART_UCSTTIFG: break;

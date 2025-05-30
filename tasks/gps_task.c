@@ -3,7 +3,7 @@
 #include "GPS_interface.h"
 
 void vGet_GPS(void *pvParameters) {
-    char line[100];
+    char line[75];
     GPGGA_Data gps_data;
 
     while(1) {
