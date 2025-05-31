@@ -49,4 +49,9 @@ I2C_Mode I2C_Master_ReadReg(uint8_t dev_addr, uint8_t reg_addr, uint8_t count);
  * */
 void init_I2C();
 
+/*
+ * Reconfigures the I2C
+ * */
+void restart_I2C();
+
 #endif  // I2C_DRIVER_H

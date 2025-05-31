@@ -90,7 +90,7 @@ void init_I2C() {
     // Init I2C
     UCB0CTLW0 = UCSWRST;                      // Enable SW reset
     UCB0CTLW0 |= UCMODE_3 | UCMST | UCSSEL__SMCLK | UCSYNC; // I2C master mode, SMCLK
-    UCB0BRW = 80;                             // fSCL = SMCLK/80 = ~100kHz
+    UCB0BRW = I2C_CLOCK_DIVISOR;              // fSCL = SMCLK/80 = ~100kHz
     UCB0I2CSA = DUMMY_I2C_ADDR;               // Slave Address
     UCB0CTLW0 &= ~UCSWRST;                    // Clear SW reset, resume operation
     UCB0IE |= UCNACKIE;
@@ -98,6 +98,25 @@ void init_I2C() {
     xI2CSemaphore     = xSemaphoreCreateBinary(); 
     xI2CDoneSemaphore = xSemaphoreCreateBinary();
     xSemaphoreGive(xI2CSemaphore);
+}
+
+void restart_I2C() {
+    taskENTER_CRITICAL();       // Deactivate global interrupts (by calling __disable_interrupts) and task preemption
+
+    // Put eUSCI module in reset
+    UCB0CTLW0 = UCSWRST;       
+
+    UCB0IFG &= ~(UCTXIFG + UCRXIFG);    // Clear any pending interrupts
+    UCB0IE &= ~UCRXIE;                  // Disable RX interrupt
+    UCB0IE &= ~UCTXIE;                  // Disable TX interrupt         
+
+    UCB0CTLW0 |= UCMODE_3 | UCMST | UCSSEL__SMCLK | UCSYNC; // I2C master mode, SMCLK
+    UCB0BRW = I2C_CLOCK_DIVISOR;                             // fSCL = SMCLK/80 = ~100kHz
+    UCB0I2CSA = DUMMY_I2C_ADDR;               // Slave Address
+    UCB0CTLW0 &= ~UCSWRST;                    // Clear SW reset, resume operation
+    UCB0IE |= UCNACKIE;
+
+    taskEXIT_CRITICAL();
 }
 
 //******************************************************************************

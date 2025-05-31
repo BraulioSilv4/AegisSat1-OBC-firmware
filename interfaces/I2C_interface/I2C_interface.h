@@ -10,11 +10,13 @@
  * Data received is copied to buf. Buffer passed to the function is expected 
  * to have a size >= count. 
  * */
-bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t * buf, uint8_t buf_size);
+bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t * buf, uint8_t buf_size, TickType_t timeout);
 
 /*
  * This function writes reg_data to slave dev_addr register reg_addr.
  * */
-bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count);
+bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout);
+
+void reset_I2C();
 
 #endif // I2C_INTERFACE_H

@@ -11,6 +11,7 @@
 #include "msp430fr2433.h"
 #include "gpio.h"
 #include "projdefs.h"
+#include "projdefines.h"
 
 // INTERFACES INCLUDES 
 #include "UART_interface/uart_interface.h"

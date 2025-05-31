@@ -1,43 +1,40 @@
 #include "I2C_interface.h"
 
-bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count) {
+bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout) {
     if(count == 0) return false;        // Writing nothing?
 
-    if(xSemaphoreTake(xI2CSemaphore, portMAX_DELAY)) {
-        I2C_Master_WriteReg(dev_addr, reg_addr, reg_data, count);
+    if(!xSemaphoreTake(xI2CSemaphore, timeout)) return false;
 
-        bool success = false;
-        if(xSemaphoreTake(xI2CDoneSemaphore, portMAX_DELAY)) {
-            success = true;
-        }
+    I2C_Master_WriteReg(dev_addr, reg_addr, reg_data, count);
 
-        xSemaphoreGive(xI2CSemaphore);
-        return success;
+    bool success = xSemaphoreTake(xI2CDoneSemaphore, timeout);
 
-    }
-
-    return false;
+    xSemaphoreGive(xI2CSemaphore);
+    return success;
 }
 
 
-bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t * buf, uint8_t buf_size) {
+bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t * buf, uint8_t buf_size, TickType_t timeout) {
     if(!buf || buf_size < count) return false;
 
-    if(xSemaphoreTake(xI2CSemaphore, portMAX_DELAY)) {
-        I2C_Master_ReadReg(dev_addr, reg_addr, count);
+    if(!xSemaphoreTake(xI2CSemaphore, timeout)) return false; 
 
-        bool success = false;
-        if(xSemaphoreTake(xI2CDoneSemaphore, portMAX_DELAY)) {
-            uint8_t copyIndex = 0;
-            for (copyIndex = 0; copyIndex < count; copyIndex++)
-            {
-                buf[copyIndex] = ReceiveBuffer[copyIndex];
-            }
-            success = true;
+    I2C_Master_ReadReg(dev_addr, reg_addr, count);
+
+    bool success = false;
+    if(xSemaphoreTake(xI2CDoneSemaphore, timeout)) {
+        uint8_t copyIndex = 0;
+        for (copyIndex = 0; copyIndex < count; copyIndex++)
+        {
+            buf[copyIndex] = ReceiveBuffer[copyIndex];
         }
-        xSemaphoreGive(xI2CSemaphore);
-        return success;
-    }
+        success = true;
+    } 
 
-    return false;
+    xSemaphoreGive(xI2CSemaphore);
+    return success;
 }
+
+void reset_I2C() {
+    restart_I2C();
+};
