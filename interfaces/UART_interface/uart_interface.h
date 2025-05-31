@@ -1,9 +1,11 @@
 #ifndef UART_INTERFACE_H
 #define UART_INTERFACE_H
 
-#include "hardware.h"
-
+#include "UART_driver/uart.h"
 #include "string_utils.h"
+
+#include "stdint.h"
+#include "stdbool.h"
 
 bool uart_read_byte(uint8_t *byte);
 bool uart_read_line(char *buffer, size_t max_len);

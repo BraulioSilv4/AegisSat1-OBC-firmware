@@ -1,7 +1,11 @@
-#include "hardware.h"
+#include "driverlib.h"
+
+#include "I2C_driver/i2c.h"
+#include "UART_driver/uart.h"
+#include "CLOCK_driver/clocks.h"
+
 #include "tasks.h"
 
-SemaphoreHandle_t xUartSemaphore;
 SemaphoreHandle_t xLedSemaphore;
 
 int main(void) {
@@ -12,11 +16,9 @@ int main(void) {
     xLedSemaphore = xSemaphoreCreateBinary();
     xSemaphoreGive(xLedSemaphore);
 
-    xUartSemaphore = xSemaphoreCreateBinary();
-
-
     init_clocks();
     init_UART();
+    init_I2C();
 
     init_tasks();
 

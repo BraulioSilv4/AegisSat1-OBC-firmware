@@ -1,6 +1,6 @@
 #include "string_utils.h"
 
-char * copy_string(char * dest, const char * src, size_t size) {
+char *copy_string(char *dest, const char *src, size_t size) {
     size_t i;
     for(i = 0; i < size && src[i] != '\0'; i++) {
         dest[i] = src[i];
@@ -59,7 +59,7 @@ int compare_string(const char *cmp1, const char *cmp2, size_t num) {
     return 0;
 }
 
-char * find_first_char(const char *str, const char c) {
+char *find_first_char(const char *str, const char c) {
     while(*str) {
         if(*str == c) {
             return (char *)str;
@@ -102,4 +102,3 @@ char *strtok_single_char(char *str, const char delim) {
 
     return token_start;
 }
-// End of string helper functions

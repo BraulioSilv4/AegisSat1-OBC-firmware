@@ -13,7 +13,7 @@ bool uart_read_line(char *buffer, size_t max_len) {
     }
 
     while(1) {
-        if(xSemaphoreTake(xUartSemaphore, portMAX_DELAY) == pdTRUE) {
+        if(xSemaphoreTake(xUartByteReady, portMAX_DELAY) == pdTRUE) {
             while(uart_read_byte(&byte)) {
                 if(index < max_len - 1) { // Leaving space for null terminator
                     buffer[index++] = byte;
@@ -38,7 +38,7 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
     size_t match_index = 0;
 
     while (1) {
-        if (xSemaphoreTake(xUartSemaphore, portMAX_DELAY) == pdTRUE) {
+        if (xSemaphoreTake(xUartByteReady, portMAX_DELAY) == pdTRUE) {
             while (uart_read_byte(&byte)) {
 
                 if (!in_sentence) {
@@ -68,7 +68,7 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
                     }
                 }
             }
-            xSemaphoreGive(xUartSemaphore);
+            xSemaphoreGive(xUartByteReady);
         }
     }
 }

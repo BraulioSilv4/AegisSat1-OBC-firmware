@@ -3,6 +3,7 @@
 
 #include "projdefines.h"
 #include "stdint.h"
+#include "stdbool.h"
 
 typedef struct {
     char buffer[RING_BUF_MAX_SIZE];

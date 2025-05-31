@@ -1,8 +1,8 @@
 #include "tasks.h"
 
-#include "GPS_interface.h"
+#include "GPS_interface/GPS_interface.h"
 
-void vGet_GPS(void *pvParameters) {
+void vGetGPS(void *pvParameters) {
     char line[75];
     GPGGA_Data gps_data;
 
