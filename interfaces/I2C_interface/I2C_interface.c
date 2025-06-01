@@ -1,8 +1,6 @@
 #include "I2C_interface.h"
 
 bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout) {
-    if(count == 0) return false;        // Writing nothing?
-
     if(!xSemaphoreTake(xI2CSemaphore, timeout)) return false;
 
     I2C_Master_WriteReg(dev_addr, reg_addr, reg_data, count);
