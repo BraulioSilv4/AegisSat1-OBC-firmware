@@ -22,6 +22,7 @@ void vLedTurnOnTask(void *pvParameters);
 void vToggleLedOnUART(void *pvParameters);
 void vGetGPS(void *pvParameters);
 void vGetTemperature(void *pvParameters);
+void vReadAHT20(void *pvParameters);
 
 void init_tasks();
 
