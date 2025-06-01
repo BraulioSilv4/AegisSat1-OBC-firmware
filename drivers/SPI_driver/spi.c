@@ -21,9 +21,10 @@ int spi_transfer(uint8_t *tx, uint8_t *rx, uint16_t len, uint32_t timeout) {
 
     SLAVE_CS_OUT &= ~SLAVE_CS_PIN; // Put CS low to begin transaction
 
+    UCA1TXBUF = txBuffer[txIndex++]; // Initiate transaction by sending the first byte
+    
     UCA1IE |= UCTXIE | UCRXIE;  // Enable TX and RX interrupts
 
-    UCA1TXBUF = txBuffer[txIndex++]; // Initiate transaction by sending the first byte
 
 
     return xSemaphoreTake(xSPISemaphore, timeout);
@@ -65,7 +66,7 @@ void init_SPI() {
     // Clock polarity select: inactive state is high, MSB first
     // 8-bit data, Synchronous, Master mode, 3-pin SPI, BRCLK source: SMCLK
     UCA1CTLW0 = UCSWRST; // **Put eUSCI module in reset**
-    UCA1CTLW0 |= UCSYNC | UCMST | UCSSEL__SMCLK | UCMSB;
+    UCA1CTLW0 |= UCSYNC | UCMST | UCSSEL__SMCLK | UCMSB | UCCKPH;
     UCA1BRW = 80;          // BRCLK / UCBRx = UCxCLK
                             // 8MHz  / 80    = 100kHz
 
