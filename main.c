@@ -3,6 +3,7 @@
 #include "I2C_driver/i2c.h"
 #include "UART_driver/uart.h"
 #include "CLOCK_driver/clocks.h"
+#include "SPI_driver/spi.h"
 
 #include "tasks.h"
 
@@ -19,6 +20,7 @@ int main(void) {
     init_clocks();
     init_UART();
     init_I2C();
+    init_SPI();
 
     init_tasks();
 
