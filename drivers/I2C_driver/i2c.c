@@ -88,35 +88,16 @@ void init_I2C() {
     PM5CTL0 &= ~LOCKLPM5;
 
     // Init I2C
-    UCB0CTLW0 = UCSWRST;                      // Enable SW reset
+    UCB0CTLW0 = UCSWRST;                                    // Enable SW reset
     UCB0CTLW0 |= UCMODE_3 | UCMST | UCSSEL__SMCLK | UCSYNC; // I2C master mode, SMCLK
-    UCB0BRW = I2C_CLOCK_DIVISOR;              // fSCL = SMCLK/80 = ~100kHz
-    UCB0I2CSA = DUMMY_I2C_ADDR;               // Slave Address
-    UCB0CTLW0 &= ~UCSWRST;                    // Clear SW reset, resume operation
+    UCB0BRW = I2C_CLOCK_DIVISOR;                            // fSCL = SMCLK/80 = ~100kHz
+    UCB0I2CSA = DUMMY_I2C_ADDR;                             // Slave Address
+    UCB0CTLW0 &= ~UCSWRST;                                  // Clear SW reset, resume operation
     UCB0IE |= UCNACKIE;
 
     xI2CSemaphore     = xSemaphoreCreateBinary(); 
     xI2CDoneSemaphore = xSemaphoreCreateBinary();
     xSemaphoreGive(xI2CSemaphore);
-}
-
-void restart_I2C() {
-    taskENTER_CRITICAL();       // Deactivate global interrupts (by calling __disable_interrupts) and task preemption
-
-    // Put eUSCI module in reset
-    UCB0CTLW0 = UCSWRST;       
-
-    UCB0IFG &= ~(UCTXIFG + UCRXIFG);    // Clear any pending interrupts
-    UCB0IE &= ~UCRXIE;                  // Disable RX interrupt
-    UCB0IE &= ~UCTXIE;                  // Disable TX interrupt         
-
-    UCB0CTLW0 |= UCMODE_3 | UCMST | UCSSEL__SMCLK | UCSYNC; // I2C master mode, SMCLK
-    UCB0BRW = I2C_CLOCK_DIVISOR;                             // fSCL = SMCLK/80 = ~100kHz
-    UCB0I2CSA = DUMMY_I2C_ADDR;               // Slave Address
-    UCB0CTLW0 &= ~UCSWRST;                    // Clear SW reset, resume operation
-    UCB0IE |= UCNACKIE;
-
-    taskEXIT_CRITICAL();
 }
 
 //******************************************************************************
@@ -169,20 +150,20 @@ __interrupt void USCI_B0_ISR(void) {
                     break;
 
                 case SWITCH_TO_RX_MODE:
-                    UCB0IE |= UCRXIE;           // Enable RX interrupt
-                    UCB0IE &= ~UCTXIE;          // Disable TX interrupt
-                    UCB0CTLW0 &= ~UCTR;         // Switch to receiver I2C mode
-                    MasterMode = RX_DATA_MODE;  // State to receive the data
-                    UCB0CTLW0 |= UCTXSTT;       // Send repeated start
+                    UCB0IE |= UCRXIE;               // Enable RX interrupt
+                    UCB0IE &= ~UCTXIE;              // Disable TX interrupt
+                    UCB0CTLW0 &= ~UCTR;             // Switch to receiver I2C mode
+                    MasterMode = RX_DATA_MODE;      // State to receive the data
+                    UCB0CTLW0 |= UCTXSTT;           // Send repeated start
 
-                    if(RXByteCtr == 1) {        // If only one byte to read
+                    if(RXByteCtr == 1) {            // If only one byte to read
                         while((UCB0CTLW0 & UCTXSTT));
-                        UCB0CTLW0 |= UCTXSTP;   // Send STOP condition
+                        UCB0CTLW0 |= UCTXSTP;       // Send STOP condition
                     }
                     break;
 
                 case TX_DATA_MODE:
-                    if (TXByteCtr) {            // Send byte
+                    if (TXByteCtr) {                // Send byte
                         UCB0TXBUF = TransmitBuffer[TransmitIndex++];
                         TXByteCtr--;
                     } else {                        //Done with transmission

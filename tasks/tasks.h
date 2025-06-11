@@ -13,16 +13,32 @@
 #include "projdefs.h"
 #include "projdefines.h"
 
-// INTERFACES INCLUDES 
-#include "UART_interface/uart_interface.h"
+/* Communication */
+void comms_task(void *pvParameters);
 
-extern SemaphoreHandle_t xLedSemaphore;
-void vLedTurnOffTask(void *pvParameters);
-void vLedTurnOnTask(void *pvParameters);
-void vToggleLedOnUART(void *pvParameters);
-void vGetGPS(void *pvParameters);
-void vGetTemperature(void *pvParameters);
-void vReadAHT20(void *pvParameters);
+/* Info & Status Gathering */
+void EPS_task(void *pvParameters);
+void GPS_task(void *pvParameters);
+void HK_task(void *pvParameters);
+void IMU_task(void *pvParameters);
+void payload_task(void *pvParameters);
+
+/* Processing & Storage */
+void ADCS_task(void *pvParameters);
+void store_data_task(void *pvParameters);
+
+/* System */
+void watchdog_task(void *pvParameters);
+
+/* Testing */
+// void vGetGPS(void *pvParameters);
+// void vGetTemperature(void *pvParameters);
+// void vReadAHT20(void *pvParameters);
+
+/* DEBUGGING */
+// extern SemaphoreHandle_t xLedSemaphore;
+// void vLedTurnOffTask(void *pvParameters);
+// void vLedTurnOnTask(void *pvParameters);
 
 void init_tasks();
 

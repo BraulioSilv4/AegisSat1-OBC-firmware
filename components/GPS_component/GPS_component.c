@@ -1,6 +1,6 @@
-#include "GPS_interface.h"
+#include "GPS_component.h"
 
-uint8_t calculate_checksum(const char *nmea) {
+static uint8_t calculate_checksum(const char *nmea) {
     uint8_t checksum = 0;
     const char *p = nmea + 1; // Skip $
     while(*p && *p != '*') {
@@ -9,7 +9,7 @@ uint8_t calculate_checksum(const char *nmea) {
     return checksum;
 }
 
-bool get_checksum_from_nmea(const char *nmea, uint8_t *out_checksum) {
+static bool get_checksum_from_nmea(const char *nmea, uint8_t *out_checksum) {
     const char *star = find_first_char(nmea, '*');
     if(!star || string_length(star) < 2) return false;
     char checksum[2];
@@ -22,7 +22,7 @@ bool get_checksum_from_nmea(const char *nmea, uint8_t *out_checksum) {
     }
 }
 
-bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
+static bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
     if(!nmea || !data) return false;
     int cmp_ret = compare_string(nmea, GPGGA_PATTERN, string_length(GPGGA_PATTERN));
     if(cmp_ret != 0) {
@@ -53,3 +53,10 @@ bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
     
     return true;
 }   
+
+bool get_gps_data(GPGGA_Data *data) {
+    char line[75];
+    if(!uart_read_line_pattern(line, sizeof(line), "$GPGGA")) return false; 
+    parse_nmea_gpgga(line, data);
+    return true;
+}

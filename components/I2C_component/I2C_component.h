@@ -1,5 +1,5 @@
-#ifndef I2C_INTERFACE_H
-#define I2C_INTERFACE_H
+#ifndef I2C_COMPONENT_H
+#define I2C_COMPONENT_H
 
 #include "I2C_driver/i2c.h"
 
@@ -17,6 +17,4 @@ bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t *
  * */
 bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout);
 
-void reset_I2C();
-
-#endif // I2C_INTERFACE_H
+#endif // I2C_COMPONENT_H

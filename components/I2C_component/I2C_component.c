@@ -1,4 +1,4 @@
-#include "I2C_interface.h"
+#include "I2C_component.h"
 
 bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout) {
     if(!xSemaphoreTake(xI2CSemaphore, timeout)) return false;
@@ -32,7 +32,3 @@ bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t *
     xSemaphoreGive(xI2CSemaphore);
     return success;
 }
-
-void reset_I2C() {
-    restart_I2C();
-};

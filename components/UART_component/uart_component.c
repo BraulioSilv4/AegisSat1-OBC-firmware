@@ -1,6 +1,6 @@
-#include "uart_interface.h"
+#include "uart_component.h"
 
-bool uart_read_byte(uint8_t *byte) {
+static bool uart_read_byte(uint8_t *byte) {
     return dequeue(&uartRx, byte);
 }
 
@@ -40,7 +40,6 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
     while (1) {
         if (xSemaphoreTake(xUartByteReady, portMAX_DELAY) == pdTRUE) {
             while (uart_read_byte(&byte)) {
-
                 if (!in_sentence) {
                     if (byte == pattern[match_index]) {
                         buffer[match_index++] = byte;
@@ -68,7 +67,6 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
                     }
                 }
             }
-            xSemaphoreGive(xUartByteReady);
         }
     }
 }

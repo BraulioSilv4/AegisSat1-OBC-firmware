@@ -117,7 +117,7 @@
  * (in words, not in bytes!).  The kernel does not use this constant for any other
  * purpose.  Demo applications use the constant to make the demos somewhat portable
  * across hardware architectures. */
-#define configMINIMAL_STACK_SIZE                   128
+#define configMINIMAL_STACK_SIZE                   64
 
 /* configMAX_TASK_NAME_LEN sets the maximum length (in characters) of a task's
  * human readable name.  Includes the NULL terminator. */
@@ -220,7 +220,7 @@
  * FreeRTOS/source/timers.c source file must be included in the build if
  * configUSE_TIMERS is set to 1.  Default to 0 if left undefined.  See
  * https://www.freertos.org/RTOS-software-timer.html. */
-#define configUSE_TIMERS                1
+#define configUSE_TIMERS                0   // changed to 0
 
 /* configTIMER_TASK_PRIORITY sets the priority used by the timer task.  Only
  * used if configUSE_TIMERS is set to 1.  The timer task is a standard FreeRTOS
@@ -250,7 +250,7 @@
  * FreeRTOS/source/event_groups.c source file must be included in the build if
  * configUSE_EVENT_GROUPS is set to 1. Defaults to 1 if left undefined. */
 
-#define configUSE_EVENT_GROUPS    1
+#define configUSE_EVENT_GROUPS    0 // changed to 0
 
 /******************************************************************************/
 /* Stream Buffer related definitions. *****************************************/
@@ -261,7 +261,7 @@
  * FreeRTOS/source/stream_buffer.c source file must be included in the build if
  * configUSE_STREAM_BUFFERS is set to 1. Defaults to 1 if left undefined. */
 
-#define configUSE_STREAM_BUFFERS    1
+#define configUSE_STREAM_BUFFERS   0 // changed to 0
 
 /******************************************************************************/
 /* Memory allocation related definitions. *************************************/
@@ -286,7 +286,7 @@
  * it must be tailored to each application.  Note the heap will appear in the .bss
  * section.  See https://www.freertos.org/a00111.html. */
 #define KB                                           1024                                    
-#define configTOTAL_HEAP_SIZE                        2*KB     
+#define configTOTAL_HEAP_SIZE                        3*KB      
 
 /* Set configAPPLICATION_ALLOCATED_HEAP to 1 to have the application allocate
  * the array used as the FreeRTOS heap.  Set to 0 to have the linker allocate the
@@ -625,27 +625,27 @@
  * the build, or 0 to exclude the named feature from the build. */
 #define configUSE_TASK_NOTIFICATIONS           1
 #define configUSE_MUTEXES                      1
-#define configUSE_RECURSIVE_MUTEXES            1
-#define configUSE_COUNTING_SEMAPHORES          1
+#define configUSE_RECURSIVE_MUTEXES            0    // changed to 0
+#define configUSE_COUNTING_SEMAPHORES          0    // changed to 0
 #define configUSE_QUEUE_SETS                   0
 #define configUSE_APPLICATION_TASK_TAG         0
 
 /* Set the following INCLUDE_* constants to 1 to incldue the named API function,
  * or 0 to exclude the named API function.  Most linkers will remove unused
  * functions even when the constant is 1. */
-#define INCLUDE_vTaskPrioritySet               1
-#define INCLUDE_uxTaskPriorityGet              1
-#define INCLUDE_vTaskDelete                    1
-#define INCLUDE_vTaskSuspend                   1
-#define INCLUDE_xResumeFromISR                 1
+#define INCLUDE_vTaskPrioritySet               0    // changed to 0
+#define INCLUDE_uxTaskPriorityGet              0    // changed to 0
+#define INCLUDE_vTaskDelete                    1    
+#define INCLUDE_vTaskSuspend                   0    // changed to 0
+#define INCLUDE_xResumeFromISR                 0    // changed to 0
 #define INCLUDE_vTaskDelayUntil                1
 #define INCLUDE_vTaskDelay                     1
-#define INCLUDE_xTaskGetSchedulerState         1
-#define INCLUDE_xTaskGetCurrentTaskHandle      1
-#define INCLUDE_uxTaskGetStackHighWaterMark    1
+#define INCLUDE_xTaskGetSchedulerState         0    // changed to 0
+#define INCLUDE_xTaskGetCurrentTaskHandle      1    // changed to 0
+#define INCLUDE_uxTaskGetStackHighWaterMark    0    // changed to 0
 #define INCLUDE_xTaskGetIdleTaskHandle         0
 #define INCLUDE_eTaskGetState                  0
-#define INCLUDE_xEventGroupSetBitFromISR       1
+#define INCLUDE_xEventGroupSetBitFromISR       0    // changed to 0
 #define INCLUDE_xTimerPendFunctionCall         0
 #define INCLUDE_xTaskAbortDelay                0
 #define INCLUDE_xTaskGetHandle                 0
