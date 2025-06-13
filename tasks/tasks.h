@@ -1,17 +1,20 @@
 #ifndef TASKS_H
 #define TASKS_H
 
-// RTOS INCLUDES 
+/* Kernel Includes */
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
 #include "task.h"
 #include "semphr.h"
 
-// MSP430 INCLUDES
+/* Project Defines */
 #include "msp430fr2433.h"
 #include "gpio.h"
 #include "projdefs.h"
 #include "projdefines.h"
+
+/* Interfaces Provider */
+#include "interfaces/instantiator.h"
 
 /* Communication */
 void comms_task(void *pvParameters);

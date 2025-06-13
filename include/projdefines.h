@@ -83,4 +83,11 @@
 #define MCLK_FREQ_MHZ        16                 // MCLK = 16MHz
 #define SMCLK_FREQ_MHZ       8                  // SMCLK = 8MHz
 
+/****************************************************************************************
+* Project Macros ************************************************************************
+*****************************************************************************************/
+#define container_of(ptr, type, member) ({                      \
+        const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
+        (type *)( (char *)__mptr - offsetof(type,member) );})
+
 #endif // PROJECT_DEFINES_H
