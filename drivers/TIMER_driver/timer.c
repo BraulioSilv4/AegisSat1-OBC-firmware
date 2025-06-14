@@ -7,3 +7,11 @@ void init_timer() {
             | MC__CONTINUOUS    // Continuous mode
             | TACLR;            // Clear timer again
 }
+
+void start_counter() {
+    TA1R = 0;
+}
+
+uint16_t get_time_us() {
+    return TA1R;
+}

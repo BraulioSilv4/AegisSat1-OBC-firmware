@@ -1,8 +1,12 @@
 #ifndef PROJECT_DEFINES_H
 #define PROJECT_DEFINES_H
 
+/* C Defines */
 #include "stdint.h"
 #include "stdbool.h"
+
+/* MSP430FR2433 HAL */
+#include "msp430fr2433.h"
 
 /****************************************************************************************
 * I2C Defines ***************************************************************************
@@ -25,6 +29,7 @@
 #define BMP280                  0x77
 #define BMP280_CHIP_ID          0x58
 #define BMP280_MEASURING_BIT    0x08
+#define BMP280_CONFIG_MASK      0xFD    // Mask to use when writing to the config register
 #define BMP280_MAX_READ_TRIES   5
 /* BMP280 Regs */
 #define BMP280_CHIP_ID_R        0xD0    // The “id” register contains the chip identification number chip_id[7:0], which is 0x58
@@ -89,5 +94,10 @@
 #define container_of(ptr, type, member) ({                      \
         const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
         (type *)( (char *)__mptr - offsetof(type,member) );})
+
+#define U16(msb, lsb) ((uint16_t)(((msb) << 8) | (lsb)))
+#define S16(msb, lsb) ((int16_t)(((msb) << 8) | (lsb)))
+
+#define INVALID_VALUE ~0
 
 #endif // PROJECT_DEFINES_H

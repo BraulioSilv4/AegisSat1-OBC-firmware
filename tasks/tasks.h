@@ -16,6 +16,9 @@
 /* Interfaces Provider */
 #include "interfaces/instantiator.h"
 
+/* Task Packet Buffers Includes */
+#include "Common/Packet_buffers/Housekeeping/housekeeping_packet_buffer.h"
+
 /* Communication */
 void comms_task(void *pvParameters);
 
@@ -44,5 +47,6 @@ void watchdog_task(void *pvParameters);
 // void vLedTurnOnTask(void *pvParameters);
 
 void init_tasks();
+void init_semaphores();
 
 #endif // TASKS_H

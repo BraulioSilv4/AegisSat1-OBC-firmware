@@ -12,6 +12,9 @@
 /* Tasks Initialization */
 #include "tasks.h"
 
+/* For tests */
+// #include "TIMER_driver/timer.h"
+
 SemaphoreHandle_t xLedSemaphore;
 
 int main(void) {
@@ -19,16 +22,17 @@ int main(void) {
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
     PMM_unlockLPM5();
 
-    // xLedSemaphore = xSemaphoreCreateBinary();
-    // xSemaphoreGive(xLedSemaphore);
-
     init_clocks();
     init_UART();
     init_I2C();
     init_SPI();
 
+    /* For Tests */
+    // init_timer();
+
     instantiate_interfaces();
 
+    init_semaphores();
     init_tasks();
 
     vTaskStartScheduler();
