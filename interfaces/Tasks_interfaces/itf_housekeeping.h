@@ -15,7 +15,6 @@
 typedef struct {
     itf_humidity_sensor_t *humidity_sensor;
     itf_pressure_sensor_t *pressure_sensor;
-    itf_pressure_sensor_t *alternate;
     itf_temperature_sensor_t *temperature_sensor;
 } HK_interface_t;
 

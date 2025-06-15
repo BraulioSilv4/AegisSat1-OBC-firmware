@@ -18,14 +18,10 @@ void HK_task(void *pvParameter) {
     itf_humidity_sensor_t *humidity_sensor = itf->humidity_sensor;
     itf_pressure_sensor_t *pressure_sensor = itf->pressure_sensor;
     itf_temperature_sensor_t *temperature_sensor = itf->temperature_sensor;
-    itf_pressure_sensor_t *pressure_alternate = itf->alternate;
 
     if(!humidity_sensor->init(humidity_sensor, pdMS_TO_TICKS(INIT_TIMEOUT_MS))) vTaskDelete(NULL);
     if(!pressure_sensor->init(pressure_sensor, pdMS_TO_TICKS(INIT_TIMEOUT_MS))) vTaskDelete(NULL);
     if(!temperature_sensor->init(temperature_sensor, pdMS_TO_TICKS(INIT_TIMEOUT_MS))) vTaskDelete(NULL);
-    pressure_alternate->init(pressure_alternate, pdMS_TO_TICKS(INIT_TIMEOUT_MS));
-
-    uint32_t pressure_linear = 0;
 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1) {
@@ -53,12 +49,6 @@ void HK_task(void *pvParameter) {
             )) {
                 hk_packets[hk_next_packet_index].pressure = INVALID_VALUE;
             }
-
-            pressure_alternate->get_pressure(pressure_alternate, &pressure_linear, pdMS_TO_TICKS(READ_TIMEOUT_MS));
-
-            // Future work get time and add to packet
-            volatile float linear_pressure = (((float)pressure_linear/100.0f)/100.0f);
-            volatile float _32bit_pressure = ((float)hk_packets[hk_next_packet_index].pressure/100.0f);
 
             if(++hk_next_packet_index >= HK_PACKET_NUMBER) hk_next_packet_index = 0;
             xSemaphoreGive(hk_buffer_mutex);

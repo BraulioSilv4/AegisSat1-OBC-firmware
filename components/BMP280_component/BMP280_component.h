@@ -24,7 +24,6 @@ typedef struct BMP280_sensor {
     int32_t pressure;
     bool new_temperature;
     bool new_pressure;
-    bool implementation32;
 
     /* Trimming parameters */
     uint16_t dig_T1;
@@ -42,9 +41,6 @@ typedef struct BMP280_sensor {
 } BMP280_sensor_t;
 
 void BMP280_sensor_create(BMP280_sensor_t *this);
-
-void BMP280_sensor_create_32(BMP280_sensor_t *this);
-void BMP280_sensor_create_linear(BMP280_sensor_t *this);
 
 bool BMP280_init_temperature(itf_temperature_sensor_t *this, TickType_t timeout);
 bool BMP280_init_pressure(itf_pressure_sensor_t *this, TickType_t timeout);

@@ -38,13 +38,8 @@ static bool BMP280_read(BMP280_sensor_t *this, TickType_t timeout) {
     raw_temperature = ((uint32_t)buf[3] << 12) | ((uint32_t)buf[4] << 4) | ((uint32_t)(buf[5] >> 4));
 
     // Compute temperature needs to be called first for t_fine to be computed
-    if(this->implementation32) {
-        this->temperature = (int16_t)bmp280_compute_temperature32(this, raw_temperature);
-        this->pressure = bmp280_compute_pressure32(this, raw_pressure);
-    } else {
-        this->temperature = (int16_t)bmp280_compute_temperature_linear(this, raw_temperature);
-        this->pressure = bmp280_compute_pressure_linear(this, raw_pressure);
-    }
+    this->temperature = (int16_t)bmp280_compute_temperature(this, raw_temperature);
+    this->pressure = bmp280_compute_pressure(this, raw_pressure);
     this->new_temperature = true;
     this->new_pressure = true;
     
@@ -144,62 +139,3 @@ void BMP280_sensor_create(BMP280_sensor_t *this) {
     this->dig_P8 = 0xC6F8;
     this->dig_P9 = 0x1770;
 }
-
-void BMP280_sensor_create_32(BMP280_sensor_t *this) {
-    this->pressure_interface.init = BMP280_init_pressure;
-    this->pressure_interface.get_pressure = BMP280_read_pressure;
-    this->temperature_interface.init = BMP280_init_temperature;
-    this->temperature_interface.get_temperature = BMP280_read_temperature;
-
-    /* Implementation State */
-    this->initialized = false;
-    this->new_pressure = false;
-    this->new_temperature = false;
-    this->pressure = 0;
-    this->temperature = 0;
-    this->implementation32 = true;
-
-    /* Trimming values */
-    this->dig_T1 = 0x6AEA;
-    this->dig_T2 = 0x6488;
-    this->dig_T3 = 0x0032;
-    this->dig_P1 = 0x93B6;
-    this->dig_P2 = 0xD732;
-    this->dig_P3 = 0x0BD0;
-    this->dig_P4 = 0x1FA6;
-    this->dig_P5 = 0xFEE9;
-    this->dig_P6 = 0xFFF9;
-    this->dig_P7 = 0x3C8C;
-    this->dig_P8 = 0xC6F8;
-    this->dig_P9 = 0x1770;
-}
-
-void BMP280_sensor_create_linear(BMP280_sensor_t *this) {
-    this->pressure_interface.init = BMP280_init_pressure;
-    this->pressure_interface.get_pressure = BMP280_read_pressure;
-    this->temperature_interface.init = BMP280_init_temperature;
-    this->temperature_interface.get_temperature = BMP280_read_temperature;
-
-    /* Implementation State */
-    this->initialized = false;
-    this->new_pressure = false;
-    this->new_temperature = false;
-    this->pressure = 0;
-    this->temperature = 0;
-    this->implementation32 = false;
-
-    /* Trimming values */
-    this->dig_T1 = 0x6AEA;
-    this->dig_T2 = 0x6488;
-    this->dig_T3 = 0x0032;
-    this->dig_P1 = 0x93B6;
-    this->dig_P2 = 0xD732;
-    this->dig_P3 = 0x0BD0;
-    this->dig_P4 = 0x1FA6;
-    this->dig_P5 = 0xFEE9;
-    this->dig_P6 = 0xFFF9;
-    this->dig_P7 = 0x3C8C;
-    this->dig_P8 = 0xC6F8;
-    this->dig_P9 = 0x1770;
-}
-

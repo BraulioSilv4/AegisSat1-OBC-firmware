@@ -21,11 +21,11 @@
  *
  * Pressure output example 10091652 = 100916.52 <=> 1009.16 hPa
  */
-//#if BMP280_CONVERSION_MODE == BMP280_IMPL_LINEAR
+#if BMP280_CONVERSION_MODE == BMP280_IMPL_LINEAR
 
 static int32_t t_fine;
 
-int32_t bmp280_compute_temperature_linear(BMP280_sensor_t *this, int32_t raw_temp) {
+int32_t bmp280_compute_temperature(BMP280_sensor_t *this, int32_t raw_temp) {
     int32_t var1;
     int32_t var2;
     int32_t T;
@@ -38,8 +38,8 @@ int32_t bmp280_compute_temperature_linear(BMP280_sensor_t *this, int32_t raw_tem
 
 // linear regression degree 1
 // uint32_t _1pressure = (uint32_t)((-0.1633868f * raw_pressure) + (0.02374819f * t_fine) + 147718.7f);
-uint32_t bmp280_compute_pressure_linear(BMP280_sensor_t *this, int32_t raw_pressure) {
+uint32_t bmp280_compute_pressure(BMP280_sensor_t *this, int32_t raw_pressure) {
     return (uint32_t)((-16 * raw_pressure) + (2 * t_fine) + 14771870);
 }
 
-//#endif
+#endif

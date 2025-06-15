@@ -6,12 +6,11 @@
  * (Compensation formula in 32 bit fixed point).
  * BST-BMP280-DS001-11, Document revision 1.14
  */
-
-//#if BMP280_CONVERSION_MODE == BMP280_IMPL_32BIT
+#if BMP280_CONVERSION_MODE == BMP280_IMPL_32BIT
 
 static int32_t t_fine;
 
-int32_t bmp280_compute_temperature32(BMP280_sensor_t *this, int32_t raw_temp) {
+int32_t bmp280_compute_temperature(BMP280_sensor_t *this, int32_t raw_temp) {
     int32_t var1;
     int32_t var2;
     int32_t T;
@@ -22,7 +21,7 @@ int32_t bmp280_compute_temperature32(BMP280_sensor_t *this, int32_t raw_temp) {
     return T;
 }
 
-uint32_t bmp280_compute_pressure32(BMP280_sensor_t *this, int32_t raw_pressure) {
+uint32_t bmp280_compute_pressure(BMP280_sensor_t *this, int32_t raw_pressure) {
     int32_t var1, var2;
     uint32_t p;
     var1 = (((int32_t)t_fine)>>1) - (int32_t)64000;
@@ -50,4 +49,4 @@ uint32_t bmp280_compute_pressure32(BMP280_sensor_t *this, int32_t raw_pressure) 
     return p;
 }
 
-//#endif
+#endif
