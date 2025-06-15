@@ -18,11 +18,6 @@ void init_tasks() {
     /* System */
     // xTaskCreate(watchdog_task, "wdt", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
 
-    /* Tests */
-    // xTaskCreate(vGetGPS, "GG", 200, NULL, 1, NULL);
-    // xTaskCreate(vGetTemperature, "temp", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-    // xTaskCreate(vReadAHT20, "AHT20", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-
     /* DEBUGGING */
     // xTaskCreate(vLedTurnOnTask, "Turn on LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
     // xTaskCreate(vLedTurnOffTask, "Turn off LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);

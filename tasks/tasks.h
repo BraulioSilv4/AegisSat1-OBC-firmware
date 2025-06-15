@@ -36,11 +36,6 @@ void store_data_task(void *pvParameters);
 /* System */
 void watchdog_task(void *pvParameters);
 
-/* Testing */
-// void vGetGPS(void *pvParameters);
-// void vGetTemperature(void *pvParameters);
-// void vReadAHT20(void *pvParameters);
-
 /* DEBUGGING */
 // extern SemaphoreHandle_t xLedSemaphore;
 // void vLedTurnOffTask(void *pvParameters);
