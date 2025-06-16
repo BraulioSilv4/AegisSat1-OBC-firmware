@@ -1,5 +1,5 @@
-#ifndef ITF_HOUSEKEEPING_T
-#define ITF_HOUSEKEEPING_T
+#ifndef ITF_HOUSEKEEPING_H
+#define ITF_HOUSEKEEPING_H
 
 /* Kernel Includes */
 #include "FreeRTOS.h"
@@ -18,4 +18,4 @@ typedef struct {
     itf_temperature_sensor_t *temperature_sensor;
 } HK_interface_t;
 
-#endif  // ITF_HOUSEKEEPING_T
+#endif  // ITF_HOUSEKEEPING_H

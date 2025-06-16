@@ -1,10 +1,13 @@
 #ifndef HK_PACKET_H
 #define HK_PACKET_H
 
+/* Task Interface Include */
+#include "interfaces/Tasks_interfaces/itf_housekeeping.h"
+
 typedef struct {
-    uint32_t pressure;
-    int16_t temperature;
-    int16_t humidity;
+    pressure_t pressure;
+    humidity_t humidity;
+    temperature_t temperature;
 } housekeeping_packet_t;
 
 #endif // HK_PACKET_H

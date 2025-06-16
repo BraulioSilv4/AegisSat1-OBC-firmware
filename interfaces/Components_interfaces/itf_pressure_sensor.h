@@ -7,11 +7,13 @@
 /* Project Defines */
 #include "projdefines.h"
 
+typedef uint32_t pressure_t;
+
 typedef struct itf_pressure_sensor itf_pressure_sensor_t;
 
 struct itf_pressure_sensor {
     bool (*init)(itf_pressure_sensor_t *this, TickType_t timeout);
-    bool (*get_pressure)(itf_pressure_sensor_t *this, uint32_t *pressure, TickType_t timeout);
+    bool (*get_pressure)(itf_pressure_sensor_t *this, pressure_t *pressure, TickType_t timeout);
 };
 
 #endif // ITF_PRESSURE_H

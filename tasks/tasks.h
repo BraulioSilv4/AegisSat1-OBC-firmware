@@ -18,6 +18,7 @@
 
 /* Task Packet Buffers Includes */
 #include "Common/Packet_buffers/Housekeeping/housekeeping_packet_buffer.h"
+#include "Common/Packet_buffers/GPS/gps_packet_buffer.h"
 
 /* Communication */
 void comms_task(void *pvParameters);

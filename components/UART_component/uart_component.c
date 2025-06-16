@@ -4,41 +4,20 @@ static bool uart_read_byte(uint8_t *byte) {
     return dequeue(&uartRx, byte);
 }
 
-bool uart_read_line(char *buffer, size_t max_len) {
-    size_t index = 0;
-    uint8_t byte;
-
-    if(buffer == NULL || max_len == 0) {
-        return false;
-    }
-
-    while(1) {
-        if(xSemaphoreTake(xUartByteReady, portMAX_DELAY) == pdTRUE) {
-            while(uart_read_byte(&byte)) {
-                if(index < max_len - 1) { // Leaving space for null terminator
-                    buffer[index++] = byte;
-                    if(byte == '\n') {
-                        buffer[index] = '\0';
-                        return true;
-                    }
-                } else {
-                    index = 0;
-                    return false;
-                }
-            }
-        }
-    }
-}
-
-bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
-    size_t index = 0;
+bool uart_read_line_pattern(char *buffer, uint32_t max_len, const char *pattern, TickType_t timeout) {
+    uint32_t index = 0;
     uint8_t byte;
     bool in_sentence = false;
-    size_t pattern_len = string_length(pattern);
-    size_t match_index = 0;
-
+    uint32_t pattern_len = string_length(pattern);
+    uint32_t match_index = 0;
+    
+    TickType_t start = xTaskGetTickCount();
+    TickType_t remaining = timeout;
+    TickType_t elapsed;
     while (1) {
-        if (xSemaphoreTake(xUartByteReady, portMAX_DELAY) == pdTRUE) {
+        if (xSemaphoreTake(xUartByteReady, remaining) == pdTRUE) {
+            elapsed = (xTaskGetTickCount() - start);
+            remaining = (elapsed < timeout) ? (timeout - elapsed) : 0;
             while (uart_read_byte(&byte)) {
                 if (!in_sentence) {
                     if (byte == pattern[match_index]) {
@@ -67,6 +46,9 @@ bool uart_read_line_pattern(char *buffer, size_t max_len, const char *pattern) {
                     }
                 }
             }
+        } else {
+            // clear buffer
+            return false;
         }
     }
 }

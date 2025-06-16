@@ -1,10 +1,18 @@
-#ifndef GPS_COMPONENT_H
-#define GPS_COMPONENT_H
+#ifndef NEO6M_MODULE_H
+#define NEO6M_MODULE_H
 
+/* Kernel Includes */
+#include "FreeRTOS.h"
+
+/* Project Defines */
 #include "projdefines.h"
-#include "string_utils.h"
 
+/* UART Include */
 #include "UART_component/uart_component.h"
+
+/* Interfaces to implement */
+#include "interfaces/Components_interfaces/itf_gps_module.h"
+
 
 typedef enum {
     GPGGA,          // Log header
@@ -24,16 +32,19 @@ typedef enum {
     STN_ID          // Differential base station ID
 } GPGGA_Fields;
 
-typedef struct {
-    char time[TIME_LENGHT_GPGGA];         // UTC time, hhmmss.ss
-    char latitude[LAT_LENGHT_GPGGA];                         // Latitude, DDmm.mm
-    char lat_dir;                         // 'N' or 'S'
-    char longitude[LON_LENGHT_GPGGA];                        // Longitude, DDDmm.mm
-    char lon_dir;                         // 'E' or 'W'
-    char altitude[ALT_LENGHT_GPGGA];                         // Altitude in Meters  
-    //char speed_knot[SPEED_KNOT_LENGHT_GPRMC]
-} GPGGA_Data;
+typedef struct NEO6M_module {
+    itf_gps_module_t gps_interface;
 
-bool get_gps_data(GPGGA_Data *data);
+    /* GPS UART Buffer */
+    char line[GPS_BUFFER_SIZE];
 
-#endif // GPS_COMPONENT_H
+    /* Implementation State */
+    bool initialized;
+} NEO6M_module_t;
+
+void NEO6M_module_create(NEO6M_module_t *this);
+
+bool NEO6M_init(itf_gps_module_t *this, TickType_t timeout);
+bool NEO6M_get_data(itf_gps_module_t *this, gps_data_t *data, TickType_t timeout);
+
+#endif // NEO6M_MODULE_H

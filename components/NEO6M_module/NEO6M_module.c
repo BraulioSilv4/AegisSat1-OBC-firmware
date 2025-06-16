@@ -1,4 +1,4 @@
-#include "GPS_component.h"
+#include "NEO6M_module.h"
 
 static uint8_t calculate_checksum(const char *nmea) {
     uint8_t checksum = 0;
@@ -22,7 +22,7 @@ static bool get_checksum_from_nmea(const char *nmea, uint8_t *out_checksum) {
     }
 }
 
-static bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
+static bool parse_nmea_gpgga(const char *nmea, gps_data_t *data) {
     if(!nmea || !data) return false;
     int cmp_ret = compare_string(nmea, GPGGA_PATTERN, string_length(GPGGA_PATTERN));
     if(cmp_ret != 0) {
@@ -40,12 +40,12 @@ static bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
 
     while(token) {
         switch(field) {
-            case TIME: copy_string(data->time, token, sizeof(data->time) - 1); break;   
-            case LAT:  copy_string(data->latitude, token, sizeof(data->latitude) - 1); break;
+            case TIME: data->time = (uint32_t)string_to_int(token, TIME_LENGHT_GPGGA); break;   
+            case LAT:  data->latitude = string_to_int(token, LAT_LENGHT_GPGGA); break;
             case LAT_DIR: data->lat_dir = token[0]; break;
-            case LON:  copy_string(data->longitude, token, sizeof(data->longitude) - 1); break;
+            case LON:  data->longitude = string_to_int(token, LON_LENGHT_GPGGA); break;
             case LON_DIR: data->lon_dir = token[0]; break;
-            case ALT:  copy_string(data->altitude, token, sizeof(data->altitude) - 1); break;
+            case ALT:  data->altitude = (uint32_t)string_to_int(token, ALT_LENGHT_GPGGA); break;
         }
         token = strtok_single_char(NULL, ',');
         field++;
@@ -54,9 +54,25 @@ static bool parse_nmea_gpgga(const char *nmea, GPGGA_Data *data) {
     return true;
 }   
 
-bool get_gps_data(GPGGA_Data *data) {
-    char line[75];
-    if(!uart_read_line_pattern(line, sizeof(line), "$GPGGA")) return false; 
-    parse_nmea_gpgga(line, data);
-    return true;
+bool NEO6M_init(itf_gps_module_t *this, TickType_t timeout) {
+    NEO6M_module_t *neo6m = container_of(this, NEO6M_module_t, gps_interface);
+    if(!neo6m->initialized) neo6m->initialized = true;
+    return neo6m->initialized;
+}
+
+bool NEO6M_get_data(itf_gps_module_t *this, gps_data_t *data, TickType_t timeout) {
+    NEO6M_module_t *neo6m = container_of(this, NEO6M_module_t, gps_interface);
+    if(!uart_read_line_pattern(
+        neo6m->line, 
+        GPS_BUFFER_SIZE, 
+        GPGGA_PATTERN, 
+        timeout
+    )) return false;
+    return parse_nmea_gpgga(neo6m->line, data);
+}
+
+void NEO6M_module_create(NEO6M_module_t *this) {
+    this->gps_interface.init        = NEO6M_init; 
+    this->gps_interface.get_gps     = NEO6M_get_data;
+    this->initialized = false;
 }

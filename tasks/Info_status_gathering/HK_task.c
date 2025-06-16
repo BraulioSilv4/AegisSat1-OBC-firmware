@@ -3,11 +3,11 @@
 /* Task Interface Include*/
 #include "interfaces/Tasks_interfaces/itf_housekeeping.h"
 
-/* Packet Include */
+/* Packet Buffer Include */
 #include "tasks/Common/Packet_buffers/Housekeeping/housekeeping_packet_buffer.h"
 
 /* Task Defines */
-#define INIT_TIMEOUT_MS             1000
+#define HK_INIT_TIMEOUT_MS          1000
 #define READ_TIMEOUT_MS             1000
 #define WAIT_SEMPHR_MS              10
 #define HK_TASK_FREQUENCY_MS        1000
@@ -19,13 +19,13 @@ void HK_task(void *pvParameter) {
     itf_pressure_sensor_t *pressure_sensor = itf->pressure_sensor;
     itf_temperature_sensor_t *temperature_sensor = itf->temperature_sensor;
 
-    if(!humidity_sensor->init(humidity_sensor, pdMS_TO_TICKS(INIT_TIMEOUT_MS))) vTaskDelete(NULL);
-    if(!pressure_sensor->init(pressure_sensor, pdMS_TO_TICKS(INIT_TIMEOUT_MS))) vTaskDelete(NULL);
-    if(!temperature_sensor->init(temperature_sensor, pdMS_TO_TICKS(INIT_TIMEOUT_MS))) vTaskDelete(NULL);
+    if(!humidity_sensor->init(humidity_sensor, pdMS_TO_TICKS(HK_INIT_TIMEOUT_MS))) vTaskDelete(NULL);
+    if(!pressure_sensor->init(pressure_sensor, pdMS_TO_TICKS(HK_INIT_TIMEOUT_MS))) vTaskDelete(NULL);
+    if(!temperature_sensor->init(temperature_sensor, pdMS_TO_TICKS(HK_INIT_TIMEOUT_MS))) vTaskDelete(NULL);
 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1) {
-        if (xSemaphoreTake(hk_buffer_mutex, pdMS_TO_TICKS(WAIT_SEMPHR_MS))) {
+        if(xSemaphoreTake(hk_buffer_mutex, pdMS_TO_TICKS(WAIT_SEMPHR_MS))) {
             if(!temperature_sensor->get_temperature(
                 temperature_sensor, 
                 &hk_packets[hk_next_packet_index].temperature, 

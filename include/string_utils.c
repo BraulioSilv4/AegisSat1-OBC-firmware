@@ -1,7 +1,27 @@
 #include "string_utils.h"
 
-char *copy_string(char *dest, const char *src, size_t size) {
-    size_t i;
+int32_t string_to_int(char *str, uint32_t size) {
+    int32_t value = 0;
+    int8_t is_negative = 1;
+
+    uint32_t i;
+    for(i = 0; i < size; i++) {
+        char c = str[i];
+
+        if(c == '-') {
+            is_negative = -1;
+        }
+
+        if(c >= '0' && c <= '9') {
+            value = value * 10 + (c - '0');
+        }
+    }
+
+    return (value * is_negative);
+}
+
+char *copy_string(char *dest, const char *src, uint32_t size) {
+    uint32_t i;
     for(i = 0; i < size && src[i] != '\0'; i++) {
         dest[i] = src[i];
     }
@@ -40,16 +60,16 @@ bool hexstr_to_byte(const char *hexstr, uint8_t *byte) {
     return true;
 }
 
-size_t string_length(const char *str) {
-    size_t len = 0;
+uint32_t string_length(const char *str) {
+    uint32_t len = 0;
     while (str[len] != '\0') {
         len++;
     }
     return len;
 }
 
-int compare_string(const char *cmp1, const char *cmp2, size_t num) {
-    size_t i;
+int compare_string(const char *cmp1, const char *cmp2, uint32_t num) {
+    uint32_t i;
     for(i = 0; i < num; i++) {
         if(cmp1[i] != cmp2[i] || cmp1[i] == '\0' || cmp2[i] == '\0') {
             return 1;

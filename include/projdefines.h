@@ -70,11 +70,12 @@
 *****************************************************************************************/
 
 /* GPS task */
-#define GPGGA_PATTERN "$GPGGA,"
-#define TIME_LENGHT_GPGGA   11    
-#define LAT_LENGHT_GPGGA    10
-#define LON_LENGHT_GPGGA    11
-#define ALT_LENGHT_GPGGA    8
+#define GPS_BUFFER_SIZE         75
+#define GPGGA_PATTERN           "$GPGGA,"
+#define TIME_LENGHT_GPGGA       9    
+#define LAT_LENGHT_GPGGA        10
+#define LON_LENGHT_GPGGA        10
+#define ALT_LENGHT_GPGGA        4
 
 /****************************************************************************************
 * End of Tasks Defines ******************************************************************

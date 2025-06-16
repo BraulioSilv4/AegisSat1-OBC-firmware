@@ -4,7 +4,7 @@
 /* Kernel Includes */
 #include "FreeRTOS.h"
 
-/* Drivers Includes */
+/* I2C Includes */
 #include "I2C_component/I2C_component.h"
 
 /* Project Defines */
