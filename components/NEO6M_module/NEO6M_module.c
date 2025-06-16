@@ -24,10 +24,6 @@ static bool get_checksum_from_nmea(const char *nmea, uint8_t *out_checksum) {
 
 static bool parse_nmea_gpgga(const char *nmea, gps_data_t *data) {
     if(!nmea || !data) return false;
-    int cmp_ret = compare_string(nmea, GPGGA_PATTERN, string_length(GPGGA_PATTERN));
-    if(cmp_ret != 0) {
-        return false;
-    }
 
     uint8_t checksum = calculate_checksum(nmea);
     uint8_t received_checksum;
@@ -74,5 +70,6 @@ bool NEO6M_get_data(itf_gps_module_t *this, gps_data_t *data, TickType_t timeout
 void NEO6M_module_create(NEO6M_module_t *this) {
     this->gps_interface.init        = NEO6M_init; 
     this->gps_interface.get_gps     = NEO6M_get_data;
+    
     this->initialized = false;
 }

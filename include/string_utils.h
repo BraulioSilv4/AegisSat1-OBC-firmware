@@ -9,7 +9,6 @@ int32_t string_to_int(char *str, uint32_t size);
 char * copy_string(char * dest, const char * src, uint32_t size);
 bool hexstr_to_byte(const char *hexstr, uint8_t *byte);
 uint32_t string_length(const char *str);
-int compare_string(const char *cmp1, const char *cmp2, uint32_t num);
 char * find_first_char(const char *str, const char c);
 char *strtok_single_char(char *str, const char delim);
 

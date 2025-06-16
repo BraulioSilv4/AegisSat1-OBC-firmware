@@ -1,6 +1,7 @@
 #include "uart.h"
 
 /* Semaphore to notify available byte */
+static StaticSemaphore_t xUartSemaphoreState;
 SemaphoreHandle_t xUartByteReady;
 
 RingBuffer uartRx = {.head = -1, .tail = -1};
@@ -28,7 +29,7 @@ void init_UART() {
     UCA0CTLW0 &= ~UCSWRST;                    // Initialize eUSCI
     UCA0IE |= UCRXIE;                         // Enable USCI_A0 RX interrupt
 
-    xUartByteReady = xSemaphoreCreateBinary();
+    xUartByteReady = xSemaphoreCreateBinaryStatic(&xUartSemaphoreState);
 
     __bis_SR_register(GIE);         // Interrupts enabled
 }

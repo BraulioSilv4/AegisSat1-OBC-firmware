@@ -5,8 +5,9 @@ I2C_Mode MasterMode = IDLE_MODE;
 /* The Register Address/Command to use */
 uint8_t TransmitRegAddr = 0;
 
+static StaticSemaphore_t xI2CSemaphoreState;
+static StaticSemaphore_t xI2CDoneSemaphoreState;
 SemaphoreHandle_t xI2CSemaphore = NULL; 
-
 SemaphoreHandle_t xI2CDoneSemaphore = NULL;
 
 /* ReceiveBuffer: Buffer used to receive data in the ISR
@@ -95,8 +96,8 @@ void init_I2C() {
     UCB0CTLW0 &= ~UCSWRST;                                  // Clear SW reset, resume operation
     UCB0IE |= UCNACKIE;
 
-    xI2CSemaphore     = xSemaphoreCreateBinary(); 
-    xI2CDoneSemaphore = xSemaphoreCreateBinary();
+    xI2CSemaphore     = xSemaphoreCreateBinaryStatic(&xI2CSemaphoreState); 
+    xI2CDoneSemaphore = xSemaphoreCreateBinaryStatic(&xI2CDoneSemaphoreState);
     xSemaphoreGive(xI2CSemaphore);
 }
 

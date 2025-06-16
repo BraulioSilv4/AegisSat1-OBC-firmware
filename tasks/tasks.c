@@ -6,8 +6,13 @@ void init_tasks() {
 
     /* Info & Status Gathering */
     // xTaskCreate(EPS_task, "EPS", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-    xTaskCreate(GPS_task, "GPS", 100, (void *)get_gps_interface(), 1, NULL);
-    xTaskCreate(HK_task, "HK", 200, (void *)get_hk_interface(), 1, NULL);
+    static StackType_t gpsStack[100];
+    static StaticTask_t gpsTCB;
+    xTaskCreateStatic(GPS_task, "GPS", 100, (void *)get_gps_interface(), 1, gpsStack, &gpsTCB);
+
+    static StackType_t hkStack[200];
+    static StaticTask_t hkTCB;
+    xTaskCreateStatic(HK_task, "HK", 200, (void *)get_hk_interface(), 1, hkStack, &hkTCB);
     // xTaskCreate(IMU_task, "IMU", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
     // xTaskCreate(payload_task, "pl", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
@@ -25,9 +30,11 @@ void init_tasks() {
 
 void init_semaphores() {
     /* Info & Status Gathering */
-    hk_buffer_mutex = xSemaphoreCreateBinary();
+    static StaticSemaphore_t hk_mutex_state;
+    hk_buffer_mutex = xSemaphoreCreateBinaryStatic(&hk_mutex_state);
     xSemaphoreGive(hk_buffer_mutex);
 
-    gps_buffer_mutex = xSemaphoreCreateBinary();
+    static StaticSemaphore_t gps_mutex_state;
+    gps_buffer_mutex = xSemaphoreCreateBinaryStatic(&gps_mutex_state);
     xSemaphoreGive(gps_buffer_mutex);
 }

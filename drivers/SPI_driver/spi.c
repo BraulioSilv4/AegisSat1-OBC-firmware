@@ -8,6 +8,7 @@ volatile uint8_t *txBuffer, *rxBuffer;
 volatile uint16_t txLen = 0, rxLen = 0;
 volatile uint16_t txIndex = 0, rxIndex = 0;
 
+static StaticSemaphore_t xSPISemaphoreState;
 static SemaphoreHandle_t xSPISemaphore;
 
 int spi_transfer(uint8_t *tx, uint8_t *rx, uint16_t len, uint32_t timeout) {
@@ -73,6 +74,5 @@ void init_SPI() {
     
     UCA1CTLW0 &= ~UCSWRST; // **Initialize eUSCI module**
     
-
-    xSPISemaphore = xSemaphoreCreateBinary();
+    xSPISemaphore = xSemaphoreCreateBinaryStatic(&xSPISemaphoreState);
 }

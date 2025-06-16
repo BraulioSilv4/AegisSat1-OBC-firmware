@@ -68,17 +68,6 @@ uint32_t string_length(const char *str) {
     return len;
 }
 
-int compare_string(const char *cmp1, const char *cmp2, uint32_t num) {
-    uint32_t i;
-    for(i = 0; i < num; i++) {
-        if(cmp1[i] != cmp2[i] || cmp1[i] == '\0' || cmp2[i] == '\0') {
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
 char *find_first_char(const char *str, const char c) {
     while(*str) {
         if(*str == c) {
