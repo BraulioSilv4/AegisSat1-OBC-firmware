@@ -11,5 +11,7 @@ bool hexstr_to_byte(const char *hexstr, uint8_t *byte);
 uint32_t string_length(const char *str);
 char * find_first_char(const char *str, const char c);
 char *strtok_single_char(char *str, const char delim);
+void * setmem(void * ptr, uint8_t value, uint32_t length);
+void * cpymem(void * dest, const void * src, uint32_t length);
 
 #endif // STRING_UTILS_H

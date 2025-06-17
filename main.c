@@ -5,6 +5,7 @@
 #include "UART_driver/uart.h"
 #include "CLOCK_driver/clocks.h"
 #include "SPI_driver/spi.h"
+#include "GPIO_driver/gpio.h"
 
 /* Interfaces Implementations Instantiator */
 #include "interfaces/instantiator.h"
@@ -23,6 +24,7 @@ int main(void) {
     PMM_unlockLPM5();
 
     init_clocks();
+    init_GPIO();
     init_UART();
     init_I2C();
     init_SPI();
