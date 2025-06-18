@@ -1,15 +1,14 @@
-#ifndef NRF24L01_COMPONENT_H
-#define NRF24L01_COMPONENT_H
+// NRF24_component.h
 
-#include "nrf24_lowlevel.h"
-#include "nrf24_config.h"
-#include <stdbool.h>
+#ifndef NRF24_COMPONENT_H
+#define NRF24_COMPONENT_H
 
-bool NRF24_data_available();
-void NRF24_start_listening();
-void NRF24_stop_listening();
-bool NRF24_send_data(uint8_t * data, uint8_t length, TickType_t timeout);
-bool NRF24_attempt_receive(uint8_t * buffer, uint8_t length);
-void NRF24_Init();
+#include "Components_interfaces/itf_radio_module.h"
 
-#endif // NRF24L01_COMPONENT_H
+typedef struct {
+    itf_radio_module_t radio_interface;
+} NRF24_module_t;
+
+void NRF24_module_create(NRF24_module_t *module);
+
+#endif /* NRF24_COMPONENT_H */

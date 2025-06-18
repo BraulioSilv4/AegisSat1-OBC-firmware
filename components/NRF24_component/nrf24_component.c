@@ -1,20 +1,21 @@
 #include "nrf24_component.h"
+#include "nrf24_lowlevel.h"
 
 
-bool NRF24_data_available() {
+bool NRF24_data_available(itf_radio_module_t * this) {
     uint8_t status = NRF24_get_status();
     return status & RX_DR;
 }
 
-void NRF24_stop_listening() {
+void NRF24_stop_listening(itf_radio_module_t * this) {
     CE_LOW();
     uint8_t config = NRF24_read_register(CONFIG);
     NRF24_write_register(CONFIG, config & ~PRIM_RX);
     NRF24_flush_rx();
 }
 
-bool NRF24_send_data(uint8_t * data, uint8_t length, TickType_t timeout) {
-    NRF24_stop_listening();
+bool NRF24_send_data(itf_radio_module_t * this, uint8_t * data, uint8_t length, TickType_t timeout) {
+    NRF24_stop_listening(this);
  
     NRF24_flush_tx();
     NRF24_write_payload(data, length);
@@ -42,21 +43,21 @@ bool NRF24_send_data(uint8_t * data, uint8_t length, TickType_t timeout) {
     return false;
 }
 
-bool NRF24_attempt_receive(uint8_t * buffer, uint8_t length) {
-    if (!NRF24_data_available()) return false;
+bool NRF24_attempt_receive(itf_radio_module_t * this, uint8_t * buffer, uint8_t length) {
+    if (!NRF24_data_available(this)) return false;
     NRF24_read_payload(buffer, length);
     NRF24_clear_flags();
     return true;
 }
 
-void NRF24_start_listening() {
+void NRF24_start_listening(itf_radio_module_t * this) {
     CE_LOW();
     uint8_t config = NRF24_read_register(CONFIG);
     NRF24_write_register(CONFIG, config | PRIM_RX);
     CE_HIGH();
 }   
 
-void NRF24_Init() {
+void NRF24_Init(itf_radio_module_t * this) {
     CE_LOW();
     
     const uint8_t configuration_bits = PWR_UP | MASK_RX_DR | MASK_TX_DS | MASK_MAX_RT | EN_CRC | PRIM_RX;
@@ -73,5 +74,14 @@ void NRF24_Init() {
     NRF24_set_tx_addr(NRF24_TX_ADDR);
     NRF24_set_channel(NRF24_CHANNEL);
     NRF24_set_data_rate(NRF24_1MBPS_DATA_RATE); 
-    NRF24_start_listening();
+    NRF24_start_listening(this);
+}
+
+void NRF24_module_create(NRF24_module_t *module) {
+    module->radio_interface.init            = NRF24_Init;
+    module->radio_interface.start_listening = NRF24_start_listening;
+    module->radio_interface.stop_listening  = NRF24_stop_listening;
+    module->radio_interface.data_available  = NRF24_data_available;
+    module->radio_interface.send_data       = NRF24_send_data;
+    module->radio_interface.receive_data    = NRF24_attempt_receive;
 }
