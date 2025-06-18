@@ -54,9 +54,6 @@ void HK_task(void *pvParameter) {
             if(++hk_next_packet_index >= HK_PACKET_NUMBER) hk_next_packet_index = 0;
             xSemaphoreGive(hk_buffer_mutex);
         }
-        volatile housekeeping_packet_t *packet;
-        hk_read_packet(packet, pdMS_TO_TICKS(1000));
-        hk_read_packet(packet, pdMS_TO_TICKS(1000));
         vTaskDelayUntil(&xLastWakeTime, HK_TASK_FREQUENCY_TICKS);
     }
 }

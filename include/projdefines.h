@@ -127,6 +127,8 @@
 #define BMP280_PRESS_TRIM       9       // Total 16 bit trimming values for pressure
 #define BMP280_TRIM_BYTES       24      // Total bytes for all trimming values
 
+#define PCF8575                 0x20
+
 
 /* I2C driver defines */
 #define DUMMY_I2C_ADDR          0x70
