@@ -23,7 +23,7 @@
 #define R_RX_PL_WID 0x60
 #define READ_REGISTER(reg) ((reg) & 0x1F)
 #define WRITE_REGISTER(reg) ((reg) & 0x1F | 0x20)
-#define W_TX_PAYLOAD_NO_ACK 0x00
+#define W_TX_PAYLOAD_NO_ACK 0xB0
 #define NOP 0xFF
 
 // NRF24 registers
@@ -37,7 +37,7 @@
 #define STATUS 0x07 
 #define OBSERVE_TX 0x8
 #define CD 0x09
-#define RX_ADDR_P0 0X0A
+#define RX_ADDR_P0 0x0A
 #define RX_ADDR_P1 0x0B
 #define RX_ADDR_P2 0x0C
 #define RX_ADDR_P3 0x0D
@@ -67,6 +67,23 @@
 #define MAX_RT 0x10
 #define RX_P_NO 0x0E
 #define TX_FULL 0x01
+
+#define NRF24_1MBPS_DATA_RATE 0x00
+#define NRF24_2MBPS_DATA_RATE 0x08
+
+#define EN_AA_ALL_PIPES 0x3F
+#define NRF24_ADDR_WIDTH_3 0x01
+#define NRF24_ADDR_WIDTH_4 0x02
+#define NRF24_ADDR_WIDTH_5 0x03
+
+// RX Pipes
+#define NRF24_PIPE_0 0x01
+#define NRF24_PIPE_1 0x02
+#define NRF24_PIPE_2 0x04
+#define NRF24_PIPE_3 0x08
+#define NRF24_PIPE_4 0x10
+#define NRF24_PIPE_5 0x20
+
 
 /****************************************************************************************
 * I2C Defines ***************************************************************************
