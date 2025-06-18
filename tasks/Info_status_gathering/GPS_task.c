@@ -31,6 +31,7 @@ void GPS_task(void *pvParameter) {
 
             gps_packets[gps_next_packet_index].valid = read_success;
 
+            if((gps_available_packets + 1) <= GPS_PACKETS_NUM) gps_available_packets++;
             if(++gps_next_packet_index >= GPS_PACKETS_NUM) gps_next_packet_index = 0;
             xSemaphoreGive(gps_buffer_mutex);
         }

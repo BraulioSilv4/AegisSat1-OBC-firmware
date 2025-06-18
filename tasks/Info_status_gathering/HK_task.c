@@ -50,9 +50,13 @@ void HK_task(void *pvParameter) {
                 hk_packets[hk_next_packet_index].pressure = INVALID_VALUE;
             }
 
+            if((hk_available_packets + 1) <= HK_PACKET_NUMBER) hk_available_packets++;
             if(++hk_next_packet_index >= HK_PACKET_NUMBER) hk_next_packet_index = 0;
             xSemaphoreGive(hk_buffer_mutex);
         }
+        volatile housekeeping_packet_t *packet;
+        hk_read_packet(packet, pdMS_TO_TICKS(1000));
+        hk_read_packet(packet, pdMS_TO_TICKS(1000));
         vTaskDelayUntil(&xLastWakeTime, HK_TASK_FREQUENCY_TICKS);
     }
 }
