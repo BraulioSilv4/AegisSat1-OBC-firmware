@@ -76,6 +76,23 @@ I2C_Mode I2C_Master_ReadReg(uint8_t dev_addr, uint8_t reg_addr, uint8_t count) {
     return MasterMode;
 }
 
+I2C_Mode I2C_Master_WriteSlave(uint8_t dev_addr, uint8_t *reg_data, uint8_t count) {
+    MasterMode = TX_DATA_MODE;      // Set State Machine to start sending immediatly
+    cpymem((void *)TransmitBuffer, (void *)reg_data, count);
+    TXByteCtr = count;
+    TransmitIndex = 0;
+
+    UCB0I2CSA = dev_addr;
+    UCB0IFG &= ~(UCTXIFG + UCRXIFG);         // Clear any pending interrupts
+    UCB0IE &= ~UCRXIE;                       // Disable RX interrupt
+    UCB0IE |= UCTXIE;                        // Enable TX interrupt
+
+    UCB0CTLW0 |= UCTR + UCTXSTT;             // I2C TX, start condition
+    __bis_SR_register(GIE);                  // enable interrupts
+
+    return MasterMode;
+}
+
 //******************************************************************************
 // Device Initialization *******************************************************
 //******************************************************************************

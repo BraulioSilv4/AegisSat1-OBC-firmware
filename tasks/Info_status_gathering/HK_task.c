@@ -6,9 +6,11 @@
 /* Packet Buffer Include */
 #include "tasks/Common/Packet_buffers/Housekeeping/housekeeping_packet_buffer.h"
 
+#include "components/I2C_component/I2C_component.h"
+
 /* Task Defines */
 #define HK_INIT_TIMEOUT_MS          1000
-#define READ_TIMEOUT_MS             1000
+#define READ_TIMEOUT_MS             100
 #define WAIT_SEMPHR_MS              10
 #define HK_TASK_FREQUENCY_MS        1000
 #define HK_TASK_FREQUENCY_TICKS     (pdMS_TO_TICKS(HK_TASK_FREQUENCY_MS))

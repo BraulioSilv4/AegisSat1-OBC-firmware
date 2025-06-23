@@ -10,7 +10,7 @@ void watchdog_task(void *pvParameter) {
     WDT_start();
     while(1) {
         WDT_reset();
-        WDT_dead();
+
         vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(WDT_INTERVAL_MS));
     }
 }

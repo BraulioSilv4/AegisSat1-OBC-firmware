@@ -42,6 +42,8 @@ extern uint8_t TransmitBuffer[MAX_I2C_BUFFER_SIZE];
 
 I2C_Mode I2C_Master_WriteReg(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count);
 
+I2C_Mode I2C_Master_WriteSlave(uint8_t dev_addr, uint8_t *reg_data, uint8_t count);
+
 I2C_Mode I2C_Master_ReadReg(uint8_t dev_addr, uint8_t reg_addr, uint8_t count);
 
 /*

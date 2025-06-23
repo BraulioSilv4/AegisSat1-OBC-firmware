@@ -129,6 +129,8 @@
 
 #define PCF8575                 0x20
 
+#define PURPULSOR               0x42
+
 
 /* I2C driver defines */
 #define DUMMY_I2C_ADDR          0x70

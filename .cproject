@@ -64,6 +64,7 @@
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.ADVICE__POWER.213687578" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.ADVICE__POWER" value="all" valueType="string"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.OPT_FOR_SPEED.46942331" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.OPT_FOR_SPEED" value="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.OPT_FOR_SPEED.0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.OPT_LEVEL.754412722" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.MSP430_21.6.compilerID.OPT_LEVEL._none" valueType="enumerated"/>
                             </tool>
                             <tool id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.exe.linkerDebug.1851100852" name="MSP430 Linker" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.exe.linkerDebug">
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.LIBRARY.1847172921" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.LIBRARY" valueType="libs">
@@ -97,6 +98,7 @@
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.DISPLAY_ERROR_NUMBER.1691810628" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.DIAG_WRAP.971137452" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.CINIT_COMPRESSION.1184127976" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.CINIT_COMPRESSION" value="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.CINIT_COMPRESSION.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.UNUSED_SECTION_ELIMINATION.509157443" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.UNUSED_SECTION_ELIMINATION" value="com.ti.ccstudio.buildDefinitions.MSP430_21.6.linkerID.UNUSED_SECTION_ELIMINATION.on" valueType="enumerated"/>
                             </tool>
                             <tool id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.hex.1713821501" name="MSP430 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.hex">
                                 <option id="com.ti.ccstudio.buildDefinitions.MSP430_21.6.hex.ROMWIDTH.1655346614" superClass="com.ti.ccstudio.buildDefinitions.MSP430_21.6.hex.ROMWIDTH" value="8" valueType="string"/>
@@ -108,7 +110,7 @@
                         </toolChain>
                     </folderInfo>
                     <sourceEntries>
-                        <entry excluding="FreeRTOS-Kernel/src/portable/MemMang/heap_1.c|FreeRTOS-Kernel/src/portable/MemMang/heap_4.c|tasks/Processing_storage/store_data_task.c|tasks/Processing_storage/OTA_task.c|tasks/Processing_storage/ADCS_task.c|tasks/Info_status_gathering/payload_task.c|tasks/Info_status_gathering/IMU_task.c|tasks/Info_status_gathering/EPS_task.c|tasks/System/watchdog.c|tasks/Communications/Comms_task.c|FreeRTOS-Kernel/src/portable/MemMang/heap_5.c|FreeRTOS-Kernel/src/portable/MemMang/heap_3.c|FreeRTOS-Kernel/src/portable/MemMang/heap_2.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="FreeRTOS-Kernel/src/portable/MemMang/heap_1.c|FreeRTOS-Kernel/src/portable/MemMang/heap_4.c|tasks/Processing_storage/store_data_task.c|tasks/Processing_storage/OTA_task.c|tasks/Processing_storage/ADCS_task.c|tasks/Info_status_gathering/IMU_task.c|tasks/Info_status_gathering/EPS_task.c|tasks/Communications/Comms_task.c|FreeRTOS-Kernel/src/portable/MemMang/heap_5.c|FreeRTOS-Kernel/src/portable/MemMang/heap_3.c|FreeRTOS-Kernel/src/portable/MemMang/heap_2.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>
                 </configuration>
             </storageModule>

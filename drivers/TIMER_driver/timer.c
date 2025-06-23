@@ -15,3 +15,4 @@ void start_counter() {
 uint16_t get_time_us() {
     return TA1R;
 }
+

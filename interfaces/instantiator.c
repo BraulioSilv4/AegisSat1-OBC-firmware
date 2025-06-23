@@ -23,7 +23,7 @@ void instantiate_interfaces() {
     hk_interface.temperature_sensor = &aht20_sensor.temperature_interface;
     hk_interface.pressure_sensor    = &bmp280_sensor.pressure_interface;
     gps_inteface.gps_module         = &neo6m_module.gps_interface;
-    comm_interface.radio_module = &nrf24_module.radio_interface;
+    comm_interface.radio_module     = &nrf24_module.radio_interface;
 }
 
 HK_interface_t *get_hk_interface() {

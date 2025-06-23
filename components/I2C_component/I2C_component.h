@@ -17,4 +17,6 @@ bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t *
  * */
 bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout);
 
+bool I2C_write_to_slave(uint8_t dev_addr, uint8_t *reg_data, uint8_t count, TickType_t timeout);
+
 #endif // I2C_COMPONENT_H
