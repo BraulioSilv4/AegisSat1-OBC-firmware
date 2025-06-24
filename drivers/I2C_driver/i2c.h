@@ -1,16 +1,14 @@
 #ifndef I2C_DRIVER_H
 #define I2C_DRIVER_H
 
-// RTOS includes
+/* Kernel Includes */
 #include "FreeRTOS.h"
 #include "semphr.h"
 
-#include "msp430fr2433.h"
+/* Project defines includes */
 #include "projdefines.h"
 
-#include "stdbool.h"
-#include "stdint.h"
-
+/* Utils includes */
 #include "string_utils.h"
 
 //******************************************************************************

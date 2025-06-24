@@ -1,8 +1,10 @@
 #ifndef I2C_COMPONENT_H
 #define I2C_COMPONENT_H
 
+/* Driver Includes */
 #include "I2C_driver/i2c.h"
 
+/* Utils Includes */
 #include "string_utils.h"
 
 /*

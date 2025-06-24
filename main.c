@@ -1,6 +1,7 @@
 #include "driverlib.h"
 
 /* Driver Includes */
+#include "ADC_driver/adc.h"
 #include "I2C_driver/i2c.h"
 #include "UART_driver/uart.h"
 #include "CLOCK_driver/clocks.h"
@@ -28,6 +29,7 @@ int main(void) {
     init_UART();
     init_I2C();
     init_SPI();
+    init_ADC();
 
     /* For Tests */
     // init_timer();

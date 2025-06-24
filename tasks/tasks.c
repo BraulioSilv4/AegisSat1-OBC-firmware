@@ -2,9 +2,9 @@
 
 void init_tasks() {
     /* Communication */
-    // static StackType_t commStack[200];
-    // static StaticTask_t commTCB;
-    // xTaskCreateStatic(comms_task, "Comm", 200,(void *) get_comm_interface(), 1, commStack, &commTCB);
+    static StackType_t commStack[200];
+    static StaticTask_t commTCB;
+    xTaskCreateStatic(comms_task, "Comm", 200,(void *) get_comm_interface(), 1, commStack, &commTCB);
 
     /* Info & Status Gathering */
     // xTaskCreate(EPS_task, "EPS", configMINIMAL_STACK_SIZE, NULL, 1, NULL);

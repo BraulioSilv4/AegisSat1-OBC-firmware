@@ -12,7 +12,7 @@ bool I2C_write_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint
 }
 
 
-bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t * buf, uint8_t buf_size, TickType_t timeout) {
+bool I2C_read_slave(uint8_t dev_addr, uint8_t reg_addr, uint8_t count, uint8_t *buf, uint8_t buf_size, TickType_t timeout) {
     if(!buf || buf_size < count) return false;
 
     if(!xSemaphoreTake(xI2CSemaphore, timeout)) return false; 

@@ -7,7 +7,7 @@ uint8_t TransmitRegAddr = 0;
 
 static StaticSemaphore_t xI2CSemaphoreState;
 static StaticSemaphore_t xI2CDoneSemaphoreState;
-SemaphoreHandle_t xI2CSemaphore = NULL; 
+SemaphoreHandle_t xI2CSemaphore     = NULL; 
 SemaphoreHandle_t xI2CDoneSemaphore = NULL;
 
 /* ReceiveBuffer: Buffer used to receive data in the ISR
@@ -184,12 +184,12 @@ __interrupt void USCI_B0_ISR(void) {
                     if (TXByteCtr) {                // Send byte
                         UCB0TXBUF = TransmitBuffer[TransmitIndex++];
                         TXByteCtr--;
-                    } else {                        //Done with transmission
+                    } else {                        // Done with transmission
                         UCB0CTLW0 |= UCTXSTP;       // Send stop condition
                         MasterMode = IDLE_MODE;
                         UCB0IE &= ~UCTXIE;          // disable TX interrupt
 
-                        // Receiving bytes completed
+                        // Finished transmission
                         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
                         xSemaphoreGiveFromISR(xI2CDoneSemaphore, &xHigherPriorityTaskWoken);
                         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
