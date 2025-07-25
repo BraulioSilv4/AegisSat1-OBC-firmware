@@ -14,6 +14,7 @@ bool uart_read_line_pattern(char *buffer, uint32_t max_len, const char *pattern,
     TickType_t start = xTaskGetTickCount();
     TickType_t remaining = timeout;
     TickType_t elapsed;
+    enable_uart_interrupts();
     while (1) {
         if (xSemaphoreTake(xUartByteReady, remaining) == pdTRUE) {
             elapsed = (xTaskGetTickCount() - start);
@@ -36,6 +37,7 @@ bool uart_read_line_pattern(char *buffer, uint32_t max_len, const char *pattern,
 
                         if (byte == '\n') {
                             buffer[index] = '\0';
+                            disable_uart_interrupts();
                             return true;
                         }
                     } else {
@@ -48,6 +50,7 @@ bool uart_read_line_pattern(char *buffer, uint32_t max_len, const char *pattern,
             }
         } else {
             // clear buffer
+            disable_uart_interrupts();
             return false;
         }
     }

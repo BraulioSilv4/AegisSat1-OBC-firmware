@@ -20,6 +20,27 @@ int32_t string_to_int(char *str, uint32_t size) {
     return (value * is_negative);
 }
 
+int32_t nmea_int(char *str) {
+    int32_t value = 0;
+    int8_t is_negative = 1;
+
+    uint32_t i = 0;
+    while(str[i] != ',' && str[i] != '*') {
+        char c = str[i];
+
+        if(c == '-') {
+            is_negative = -1;
+        }
+
+        if(c >= '0' && c <= '9') {
+            value = value * 10 + (c - '0');
+        }
+        i++;
+    }
+
+    return (value * is_negative);
+}
+
 char *copy_string(char *dest, const char *src, uint32_t size) {
     uint32_t i;
     for(i = 0; i < size && src[i] != '\0'; i++) {

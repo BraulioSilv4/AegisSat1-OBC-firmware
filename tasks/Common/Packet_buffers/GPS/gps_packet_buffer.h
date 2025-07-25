@@ -8,7 +8,7 @@
 /* Packet Structure Include */
 #include "tasks/Common/Packets/gps_packet.h"
 
-#define GPS_PACKETS_NUM     1
+#define GPS_PACKETS_NUM     4
 
 extern gps_packet_t gps_packets[GPS_PACKETS_NUM];
 extern uint8_t gps_next_packet_index;

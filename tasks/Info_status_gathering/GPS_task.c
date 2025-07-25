@@ -8,7 +8,7 @@
 
 /* Task Defines */
 #define GPS_INIT_TIMEOUT_MS             1000
-#define GPS_TASK_FREQUENCY_MS           1000
+#define GPS_TASK_FREQUENCY_MS           10000
 #define GPS_READ_TIMEOUT_MS             100000
 #define WAIT_SEMPHR_MS                  10
 #define GPS_TASK_FREQUENCY_TICKS        (pdMS_TO_TICKS(GPS_TASK_FREQUENCY_MS))

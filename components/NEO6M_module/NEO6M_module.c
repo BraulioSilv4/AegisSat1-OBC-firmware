@@ -58,12 +58,12 @@ bool NEO6M_init(itf_gps_module_t *this, TickType_t timeout) {
 
 bool NEO6M_get_data(itf_gps_module_t *this, gps_data_t *data, TickType_t timeout) {
     NEO6M_module_t *neo6m = container_of(this, NEO6M_module_t, gps_interface);
-    if(!uart_read_line_pattern(
+    uart_read_line_pattern(
         neo6m->line, 
         GPS_BUFFER_SIZE, 
         GPGGA_PATTERN, 
         timeout
-    )) return false;
+    ); 
     return parse_nmea_gpgga(neo6m->line, data);
 }
 

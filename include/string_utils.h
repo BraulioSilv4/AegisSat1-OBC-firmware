@@ -6,6 +6,7 @@
 #include "stdint.h"
 
 int32_t string_to_int(char *str, uint32_t size);
+int32_t nmea_int(char *str);
 char * copy_string(char * dest, const char * src, uint32_t size);
 bool hexstr_to_byte(const char *hexstr, uint8_t *byte);
 uint32_t string_length(const char *str);

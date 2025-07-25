@@ -25,9 +25,9 @@ void init_tasks() {
     // xTaskCreate(store_data_task, "store", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
     /* System */
-    static StackType_t wdtStack[configMINIMAL_STACK_SIZE];
-    static StaticTask_t wdtTCB;
-    xTaskCreateStatic(watchdog_task, "wdt", configMINIMAL_STACK_SIZE, NULL, 2, wdtStack, &wdtTCB);
+    // static StackType_t wdtStack[configMINIMAL_STACK_SIZE];
+    // static StaticTask_t wdtTCB;
+    // xTaskCreateStatic(watchdog_task, "wdt", configMINIMAL_STACK_SIZE, NULL, 2, wdtStack, &wdtTCB);
 
     /* DEBUGGING */
     // xTaskCreate(vLedTurnOnTask, "Turn on LED Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL);

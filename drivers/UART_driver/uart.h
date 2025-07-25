@@ -14,5 +14,7 @@ extern RingBuffer uartRx;
 extern SemaphoreHandle_t xUartByteReady;
 
 void init_UART();
+void enable_uart_interrupts();
+void disable_uart_interrupts();
 
 #endif  // UART_DRIVER_H

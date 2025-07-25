@@ -16,7 +16,7 @@ void init_ADC() {
     SYSCFG2 |= ADCPCTL7;                // configure P1.7 as ADC pin
 
     ADCCTL0 |= ADCSHT_6 | ADCON;        // sample and hold 128 cycles, ADC on
-    ADCCTL1 |= ADCSHP;                  // ADCCLK = MODOSC; sampling timer; ADC conversion start source is ADCSC bit
+    ADCCTL1 |= ADCSHP | ADCSSEL_2;      // ADCCLK = MODOSC; sampling timer; ADC conversion start source is ADCSC bit
     ADCCTL2 |= ADCRES;                  // 10-bit conversion results
     ADCIE   |= ADCIE0;                  // conversion complete interrupt enable
     ADCMCTL0 |= ADCINCH_7 | ADCSREF_1;  // A7 ADC input select; Vref is internal 1.5V

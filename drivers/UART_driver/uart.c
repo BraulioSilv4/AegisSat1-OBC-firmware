@@ -27,11 +27,18 @@ void init_UART() {
     UCA0MCTLW = 0x4900 | UCOS16 | UCBRF_1;
 
     UCA0CTLW0 &= ~UCSWRST;                    // Initialize eUSCI
-    UCA0IE |= UCRXIE;                         // Enable USCI_A0 RX interrupt
 
     xUartByteReady = xSemaphoreCreateBinaryStatic(&xUartSemaphoreState);
 
     __bis_SR_register(GIE);         // Interrupts enabled
+}
+
+void enable_uart_interrupts() {
+  UCA0IE |= UCRXIE;                         // Enable USCI_A0 RX interrupt
+}
+
+void disable_uart_interrupts() {
+  UCA0IE &= ~UCRXIE;                        // Disable USCI_A0 RX interrupt
 }
 
 //******************************************************************************
