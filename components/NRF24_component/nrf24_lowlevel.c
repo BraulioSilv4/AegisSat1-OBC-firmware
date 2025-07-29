@@ -1,7 +1,7 @@
 #include "nrf24_lowlevel.h"
 
 
-void  NRF24_write_register(uint8_t reg, uint8_t data) {
+void NRF24_write_register(uint8_t reg, uint8_t data) {
     uint8_t tx[2] = { WRITE_REGISTER(reg), data };
     uint8_t rx[2];
     spi_transfer(tx, rx, 2, NRF24_SPI_TIMEOUT);

@@ -27,7 +27,7 @@ void comms_task(void *pvParameters);
 void EPS_task(void *pvParameters);
 void GPS_task(void *pvParameters);
 void HK_task(void *pvParameters);
-void IMU_task(void *pvParameters);
+void IMU_task(void *pvParams);
 void payload_task(void *pvParameters);
 
 /* Processing & Storage */
